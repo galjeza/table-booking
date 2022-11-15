@@ -14,14 +14,14 @@
     "@prisma/client": "^4.6.1",
     "daisyui": "^2.40.1",
     "eslint": "^8.27.0",
-    "next": "13.0.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "^13.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
     "autoprefixer": "^10.4.13",
-    "eslint-config-next": "13.0.3",
+    "eslint-config-next": "^13.0.3",
     "postcss": "^8.4.19",
     "prettier": "^2.7.1",
     "prisma": "^4.6.1",
