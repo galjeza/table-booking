@@ -12,7 +12,7 @@ const navigation = [
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <div className="isolate bg-white">
+    <div className="isolate bg-white ">
       <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
         <svg
           className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
@@ -84,17 +84,16 @@ export default function Hero() {
               <a
                 href="/register"
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 bg-indigo-600 text-white shadow-sm ring-1  hover:bg-indigo-700"
-            >
+              >
                 Registracija
-            </a>
-                <a
-                    href="/login"
-                    className="inline-block rounded-lg px-3 py-1.5 ml-3 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-                >
-                    Prijava
-                </a>
+              </a>
+              <a
+                href="/login"
+                className="inline-block rounded-lg px-3 py-1.5 ml-3 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+              >
+                Prijava
+              </a>
             </div>
-
           </nav>
           <Dialog
             as="div"
@@ -148,14 +147,14 @@ export default function Hero() {
                       Prijava
                     </a>
                   </div>
-                    <div className="py-6">
-                        <a
-                            href="/register"
-                            className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
-                        >
-                            Registracija
-                        </a>
-                    </div>
+                  <div className="py-6">
+                    <a
+                      href="/register"
+                      className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                    >
+                      Registracija
+                    </a>
+                  </div>
                 </div>
               </div>
             </Dialog.Panel>
@@ -187,7 +186,7 @@ export default function Hero() {
               <div>
                 <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
                   Digitalizirajte
-                  <br  />
+                  <br />
                   rezervacijo miz
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
