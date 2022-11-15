@@ -1,153 +1,210 @@
 "use client";
-import { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { useState } from 'react'
+import { Dialog } from '@headlessui/react'
+import { XIcon,MenuIcon } from '@heroicons/react/outline'
+
 
 const navigation = [
-    { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+
+
+    { name: 'Blog', href: '#blog' },
+    { name: 'Funkcionalnosti', href: '#features' },
+    { name: 'Kontakt', href: '#contact' },
 ]
 
 export default function Hero() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return (
-        <div className="relative bg-white overflow-hidden">
-            <div className="max-w-7xl mx-auto">
-                <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                    <svg
-                        className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
-                        fill="currentColor"
-                        viewBox="0 0 100 100"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                    >
-                        <polygon points="50,0 100,0 50,100 0,100" />
-                    </svg>
-
-                    <Popover>
-                        <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
-                            <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
-                                <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
-                                    <div className="flex items-center justify-between w-full md:w-auto">
-                                        <a href="#">
-                                            <span className="sr-only">Workflow</span>
-                                            <img
-                                                className="h-8 w-auto sm:h-10"
-                                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                                            />
-                                        </a>
-                                        <div className="-mr-2 flex items-center md:hidden">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                                                <span className="sr-only">Open main menu</span>
-                                                <MenuIcon className="h-6 w-6" aria-hidden="true" />
-                                            </Popover.Button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                                    {navigation.map((item) => (
-                                        <a key={item.name} href={item.href} className="font-medium text-gray-500 hover:text-gray-900">
-                                            {item.name}
-                                        </a>
-                                    ))}
-                                    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Log in
+        <div className="isolate bg-white">
+            <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
+                <svg
+                    className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
+                    viewBox="0 0 1155 678"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
+                        fillOpacity=".3"
+                        d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+                    />
+                    <defs>
+                        <linearGradient
+                            id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
+                            x1="1155.49"
+                            x2="-78.208"
+                            y1=".177"
+                            y2="474.645"
+                            gradientUnits="userSpaceOnUse"
+                        >
+                            <stop stopColor="#9089FC" />
+                            <stop offset={1} stopColor="#FF80B5" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div className="px-6 pt-6 lg:px-8">
+                <div>
+                    <nav className="flex h-9 items-center justify-between" aria-label="Global">
+                        <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
+                            <a href="#" className="-m-1.5 p-1.5">
+                                <span className="sr-only">Your Company</span>
+                                <img className="h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                            </a>
+                        </div>
+                        <div className="flex lg:hidden">
+                            <button
+                                type="button"
+                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                onClick={() => setMobileMenuOpen(true)}
+                            >
+                                <span className="sr-only">Open main menu</span>
+                                <MenuIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
+                        </div>
+                        <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
+                            {navigation.map((item) => (
+                                <a key={item.name} href={item.href} className="font-semibold text-gray-900 hover:text-gray-900">
+                                    {item.name}
+                                </a>
+                            ))}
+                        </div>
+                        <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
+                            <a
+                                href="#"
+                                className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                            >
+                                Prijava
+                            </a>
+                        </div>
+                    </nav>
+                    <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                        <Dialog.Panel focus="true" className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden">
+                            <div className="flex h-9 items-center justify-between">
+                                <div className="flex">
+                                    <a href="#" className="-m-1.5 p-1.5">
+                                        <span className="sr-only">Your Company</span>
+                                        <img
+                                            className="h-8"
+                                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                                            alt=""
+                                        />
                                     </a>
                                 </div>
-                            </nav>
-                        </div>
-
-                        <Transition
-                            as={Fragment}
-                            enter="duration-150 ease-out"
-                            enterFrom="opacity-0 scale-95"
-                            enterTo="opacity-100 scale-100"
-                            leave="duration-100 ease-in"
-                            leaveFrom="opacity-100 scale-100"
-                            leaveTo="opacity-0 scale-95"
-                        >
-                            <Popover.Panel
-                                focus
-                                className="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-                            >
-                                <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
-                                    <div className="px-5 pt-4 flex items-center justify-between">
-                                        <div>
-                                            <img
-                                                className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div className="-mr-2">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                                                <span className="sr-only">Close main menu</span>
-                                                <XIcon className="h-6 w-6" aria-hidden="true" />
-                                            </Popover.Button>
-                                        </div>
-                                    </div>
-                                    <div className="px-2 pt-2 pb-3 space-y-1">
+                                <div className="flex">
+                                    <button
+                                        type="button"
+                                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        <span className="sr-only">Close menu</span>
+                                        <XIcon className="h-6 w-6" aria-hidden="true" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="mt-6 flow-root">
+                                <div className="-my-6 divide-y divide-gray-500/10">
+                                    <div className="space-y-2 py-6">
                                         {navigation.map((item) => (
                                             <a
                                                 key={item.name}
                                                 href={item.href}
-                                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                                className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10"
                                             >
                                                 {item.name}
                                             </a>
                                         ))}
                                     </div>
-                                    <a
-                                        href="#"
-                                        className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
-                                    >
-                                        Log in
-                                    </a>
+                                    <div className="py-6">
+                                        <a
+                                            href="#"
+                                            className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                        >
+                                            Log in
+                                        </a>
+                                    </div>
                                 </div>
-                            </Popover.Panel>
-                        </Transition>
-                    </Popover>
-
-                    <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                        <div className="sm:text-center lg:text-left">
-                            <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                                <span className="block xl:inline">Data to enrich your</span>{' '}
-                                <span className="block text-indigo-600 xl:inline">online business</span>
-                            </h1>
-                            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                                fugiat veniam occaecat fugiat aliqua.
-                            </p>
-                            <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                <div className="rounded-md shadow">
-                                    <a
-                                        href="#"
-                                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-                                    >
-                                        Get started
-                                    </a>
+                            </div>
+                        </Dialog.Panel>
+                    </Dialog>
+                </div>
+            </div>
+            <main>
+                <div className="relative px-6 lg:px-8">
+                    <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
+                        <div>
+                            <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+                                <div className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                  <span className="text-gray-600">
+                    Orodje še ni na voljo za uporabo. {' '}
+                      <a href="#" className="font-semibold text-indigo-600">
+                      <span className="absolute inset-0" aria-hidden="true" />
+                      Preberi več <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </span>
                                 </div>
-                                <div className="mt-3 sm:mt-0 sm:ml-3">
+                            </div>
+                            <div>
+                                <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
+                                    Digitalizirajte
+                                    <br className="hidden sm:block" />
+                                    rezervacijo miz
+                                </h1>
+                                <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
+                                    Enostavno, učinkovito in fleksibilno orodje za spletno rezeracijo miz v gostinskih lokalih.
+                                </p>
+                                <div className="mt-8 flex gap-x-4 sm:justify-center">
                                     <a
                                         href="#"
-                                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
+                                        className="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
                                     >
-                                        Live demo
+                                        Preizkusi zdaj{" "}
+                                        <span className="text-indigo-200" aria-hidden="true">
+                      &rarr;
+                    </span>
+                                    </a>
+                                    <a
+                                        href="#"
+                                        className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                                    >
+                                        Prijava {" "}
+                                        <span className="text-gray-400" aria-hidden="true">
+                      &rarr;
+                    </span>
                                     </a>
                                 </div>
                             </div>
+                            <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+                                <svg
+                                    className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
+                                    viewBox="0 0 1155 678"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
+                                        fillOpacity=".3"
+                                        d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+                                    />
+                                    <defs>
+                                        <linearGradient
+                                            id="ecb5b0c9-546c-4772-8c71-4d3f06d544bc"
+                                            x1="1155.49"
+                                            x2="-78.208"
+                                            y1=".177"
+                                            y2="474.645"
+                                            gradientUnits="userSpaceOnUse"
+                                        >
+                                            <stop stopColor="#9089FC" />
+                                            <stop offset={1} stopColor="#FF80B5" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
                         </div>
-                    </main>
+                    </div>
                 </div>
-            </div>
-            <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <img
-                    className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-                    src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-                    alt=""
-                />
-            </div>
+            </main>
         </div>
     )
 }
