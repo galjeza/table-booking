@@ -177,7 +177,7 @@ export default function ContactSales() {
                   id="phone-number"
                   autoComplete="tel"
                   className="py-3 px-4 block w-full  focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                  placeholder="031 123 456"
+                  placeholder=""
                 />
               </div>
             </div>
@@ -223,7 +223,7 @@ export default function ContactSales() {
                 </div>
                 <div className="ml-3">
                   <p className="text-base text-gray-500">
-                    Strinjam se z{' '}
+                    Strinjam se s{' '}
                     <a
                       href="#"
                       className="font-medium text-gray-700 underline"
