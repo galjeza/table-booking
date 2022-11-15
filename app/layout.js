@@ -1,5 +1,4 @@
 import '../styles/globals.css';
-import 'tailwindcss/tailwind.css'
 
 export default function RootLayout({ children }) {
   return (
@@ -7,5 +6,5 @@ export default function RootLayout({ children }) {
       <head />
       <body>{children}</body>
     </html>
-  )
+  );
 }
