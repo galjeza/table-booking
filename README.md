@@ -14,3 +14,8 @@ Vedno predn narediš commit zaženeš komando, da mamo vsi isto formatirano kodo
 ```bash
 npm run format:fix
 ```
+
+da zalaufaš prisma studio
+```bash
+npx prisma studio
+```
