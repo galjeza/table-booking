@@ -14,4 +14,17 @@ model User {
   email String  @unique
   firstName  String?
   lastName  String?
+  password String?
+  role Role @default(USER)
+}
+
+model Restaurant {
+  id    Int     @id @default(autoincrement())
+  name String
+  location  String?
+}
+
+enum Role{
+    USER
+    ADMIN
 }
