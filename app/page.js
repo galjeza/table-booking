@@ -13,7 +13,6 @@ export default function Page() {
       <Hero />
       <Features />
       <Cta />
-        {/* <Testimonials /> */}
       <Blogs />
       <Newsletter />
       <ContactSales />

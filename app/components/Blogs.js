@@ -127,7 +127,7 @@ export default function Example() {
                   <div className="flex space-x-1 text-sm text-gray-500">
                     <time dateTime={post.datetime}>{post.date}</time>
                     <span aria-hidden="true">&middot;</span>
-                    <span>{post.readingTime} read</span>
+                    <span>{post.readingTime} branje</span>
                   </div>
                 </div>
               </div>
