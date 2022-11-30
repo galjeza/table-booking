@@ -196,7 +196,7 @@ export default function Hero() {
                 </p>
                 <div className="mt-8 flex gap-x-4 sm:justify-center">
                   <a
-                    onClick={() => signIn()}
+                    href="/auth/register"
                     className="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
                   >
                     Preizkusi zdaj{' '}
