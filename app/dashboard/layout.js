@@ -49,15 +49,6 @@ export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
-
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -110,13 +101,13 @@ export default function DashboardLayout({ children }) {
                   </div>
                 </Transition.Child>
                 <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-                  {/*<div className="flex-shrink-0 flex items-center px-4">
-                                        <img
-                                            className="h-8 w-auto"
-                                            src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                                            alt="Workflow"
-                                        />
-                                    </div>*/}
+                  <div className="flex-shrink-0 flex items-center px-4">
+                    <img
+                      className="h-8 w-auto"
+                      src="/LogoBig.svg"
+                      alt="Workflow"
+                    />
+                  </div>
                   <nav className="mt-5 px-2 space-y-1">
                     {navigation.map(item => (
                       <a
@@ -166,27 +157,19 @@ export default function DashboardLayout({ children }) {
                 </div>
               </div>
             </Transition.Child>
-            <div className="flex-shrink-0 w-14">
-              {/* Force sidebar to shrink to fit close icon */}
-            </div>
+            <div className="flex-shrink-0 w-14"></div>
           </Dialog>
         </Transition.Root>
-
-        {/* Static sidebar for desktop */}
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-              {/*TODO
-                                dodoaj logo
-                            */}
-              {/* <div className="flex items-center flex-shrink-0 px-4">
-                                <img
-                                    className="h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                                    alt="Workflow"
-                                />
-                            </div>*/}
+              <div className="flex items-center flex-shrink-0 px-4">
+                <img
+                  className="h-8 w-auto"
+                  src="/LogoBig.svg"
+                  alt="LogoBig"
+                />
+              </div>
               <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
                 {navigation.map(item => (
                   <a
