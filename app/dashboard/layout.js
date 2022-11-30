@@ -1,7 +1,8 @@
 'use client';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-// import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 import {
   CalendarIcon,
@@ -15,22 +16,22 @@ import {
 } from '@heroicons/react/outline';
 import AuthContext from '../AuthContext';
 const navigation = [
-  { name: 'Pregled', href: '#', icon: HomeIcon, current: true },
+  { name: 'Pregled', href: '/dashboard/overview', icon: HomeIcon },
   {
     name: 'Restavracije',
     href: '#',
     icon: UsersIcon,
-    current: false
+
   },
-  { name: 'Koledar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Obvestila', href: '#', icon: InboxIcon, current: false },
+  { name: 'Koledar', href: '/dashboard/calendar', icon: CalendarIcon },
+  { name: 'Obvestila', href: '#', icon: InboxIcon },
   {
     name: 'Analitika',
-    href: '#',
+    href: '/dashboard/analytics',
     icon: ChartBarIcon,
-    current: false
+
   },
-  { name: 'Nastavitve', href: '#', icon: CogIcon, current: false }
+  { name: 'Nastavitve', href: '/dashboard/settings', icon: CogIcon }
 ];
 
 import { useSession } from 'next-auth/react';
@@ -41,10 +42,16 @@ function classNames(...classes) {
 
 export default function DashboardLayout({ children }) {
   const { data: session } = useSession();
-  // const router = useRouter();
+  const pathname = usePathname();
+  const [currActivePath, setCurrActivePath] = useState(pathname);
 
-  if (!session?.user) {
-    // router.push('/api/auth/signin');
+
+
+  console.log(pathname ==="/dashboard/settings");
+
+
+  if (!session) {
+    // router.push('/dashboard/settings');
   }
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
@@ -110,19 +117,20 @@ export default function DashboardLayout({ children }) {
                   </div>
                   <nav className="mt-5 px-2 space-y-1">
                     {navigation.map(item => (
-                      <a
+                      <Link
+                          onClick={() => setCurrActivePath(item.href)}
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
-                            ? 'bg-gray-100 text-gray-900'
+                            item.href === currActivePath
+                                ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                           'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                         )}
                       >
                         <item.icon
                           className={classNames(
-                            item.current
+                              item.href === currActivePath
                               ? 'text-gray-500'
                               : 'text-gray-400 group-hover:text-gray-500',
                             'mr-4 flex-shrink-0 h-6 w-6'
@@ -130,7 +138,7 @@ export default function DashboardLayout({ children }) {
                           aria-hidden="true"
                         />
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </nav>
                 </div>
@@ -173,10 +181,11 @@ export default function DashboardLayout({ children }) {
               <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
                 {navigation.map(item => (
                   <a
+                      onClick={() => setCurrActivePath(item.href)}
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.current
+                      item.href === currActivePath
                         ? 'bg-gray-100 text-gray-900'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
@@ -184,7 +193,7 @@ export default function DashboardLayout({ children }) {
                   >
                     <item.icon
                       className={classNames(
-                        item.current
+                        item.href === currActivePath
                           ? 'text-gray-500'
                           : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-6 w-6'
@@ -235,11 +244,7 @@ export default function DashboardLayout({ children }) {
           </div>
           <main className="flex-1">
             <div className="py-6">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                <h1 className="text-2xl font-semibold text-gray-900">
-                  Nastavitve
-                </h1>
-              </div>
+
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 {children}
               </div>
