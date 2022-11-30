@@ -1,5 +1,5 @@
-"use client";
-import { useSession } from 'next-auth/react';
+'use client';
+// import { useSession } from 'next-auth/react';
 
 const tabs = [
   { name: 'Splošno', href: '#', current: true },
@@ -12,8 +12,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 export default function Settings() {
-  const { data: session } = useSession();
-  console.log(session);
+  // const { data: session } = useSession();
+  //console.log(session);
 
   return (
     <>
@@ -71,9 +71,7 @@ export default function Settings() {
                 Ime
               </dt>
               <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">
-                  {session?.user?.name}{' '}
-                </span>
+                <span className="flex-grow">{Gal} </span>
                 <span className="ml-4 flex-shrink-0">
                   <button
                     type="button"
@@ -89,10 +87,7 @@ export default function Settings() {
                 Priimek
               </dt>
               <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">
-                  {' '}
-                  {session?.user?.lastName}
-                </span>
+                <span className="flex-grow"> {Jeza}</span>
                 <span className="ml-4 flex-shrink-0">
                   <button
                     type="button"
