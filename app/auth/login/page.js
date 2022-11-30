@@ -1,16 +1,16 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 
 export default function Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
+  //const router = useRouter();
 
   const { data: session } = useSession();
   if (session) {
-    router.push('/dashboard/settings');
+   // router.push('/dashboard/settings');
   }
 
   const handleSubmit = async event => {

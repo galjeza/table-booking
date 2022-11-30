@@ -29,8 +29,8 @@ export default function Page() {
     console.log('Dobil sem reponse yeey');
     // check if status is 200
     if (res.status === 200) {
-      // redirect to login
-      window.location.href = '/auth/login';
+
+      // window.location.href = '/auth/login';
     } else {
       setError(data.error);
       console.log(data.error);
