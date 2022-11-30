@@ -53,9 +53,9 @@ export default function Hero() {
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">ImeAplikacije</span>
                 <img
-                  className="h-8"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
+                  className="h-10"
+                  src="/LogoBig.svg"
+                  alt="LogoBig"
                 />
               </a>
             </div>
@@ -109,8 +109,8 @@ export default function Hero() {
                   <a href="#" className="-m-1.5 p-1.5">
                     <span className="sr-only">Your Company</span>
                     <img
-                      className="h-8"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      className="h-10"
+                      src="/LogoBig.svg"
                       alt=""
                     />
                   </a>
