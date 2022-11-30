@@ -1,5 +1,25 @@
 'use client';
+
+import {useState} from "react";
 export default function Page() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (event)=> {
+        event.preventDefault()
+        const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        })
+
+    }
   return (
     <>
       <div className="h-screen  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -10,53 +30,15 @@ export default function Page() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Ustvarite račiun{' '}
+            Dobrodošli nazaj
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Vnesite podatke iz začnite z uporabo aplikacije.
+            Vpišite se z vašim uporabniškim imenom in geslom
           </p>
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4  sm:rounded-lg sm:px-10">
-            <form className="space-y-3" action="#" method="POST">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Ime
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="lastname"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Priimek
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="lastname"
-                    name="lastname"
-                    type="text"
-                    autoComplete="lastname"
-                    required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-
+            <form className="space-y-6" action="app/auth/login/page#" method="POST">
               <div>
                 <label
                   htmlFor="email"
@@ -66,6 +48,8 @@ export default function Page() {
                 </label>
                 <div className="mt-1">
                   <input
+                      value={email}
+                        onChange={(e)=> setEmail(e.target.value)}
                     id="email"
                     name="email"
                     type="email"
@@ -86,6 +70,8 @@ export default function Page() {
                 <div className="mt-1">
                   <input
                     id="password"
+                    value={password}
+                    onChange={(e)=> setPassword(e.target.value)}
                     name="password"
                     type="password"
                     autoComplete="current-password"
@@ -95,22 +81,29 @@ export default function Page() {
                 </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="repeat-password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Ponovite geslo
-                </label>
-                <div className="mt-1">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
                   <input
-                    id="repeat-password"
-                    name="repeat-password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                   />
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-2 block text-sm text-gray-900"
+                  >
+                    Zapomni si me
+                  </label>
+                </div>
+
+                <div className="text-sm">
+                  <a
+                    href="app/auth/login/page#"
+                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Ste pozabili geslo?
+                  </a>
                 </div>
               </div>
 
@@ -119,7 +112,7 @@ export default function Page() {
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Ustvari račun
+                  Prijava
                 </button>
               </div>
             </form>
