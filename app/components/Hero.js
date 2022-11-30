@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { XIcon, MenuIcon } from '@heroicons/react/outline';
-import {signIn} from "next-auth/react";
+import { signIn } from 'next-auth/react';
 
 const navigation = [
   { name: 'Blog', href: '#blog' },
@@ -89,7 +89,7 @@ export default function Hero() {
                 Registracija
               </a>
               <a
-                  onClick={() => signIn()}
+                onClick={() => signIn()}
                 className="inline-block rounded-lg px-3 py-1.5 ml-3 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
               >
                 Prijava
@@ -142,7 +142,7 @@ export default function Hero() {
                   </div>
                   <div className="py-6">
                     <a
-                        onClick={() => signIn()}
+                      onClick={() => signIn()}
                       className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
                     >
                       Prijava
@@ -150,7 +150,7 @@ export default function Hero() {
                   </div>
                   <div className="py-6">
                     <a
-                        onClick={() => signIn()}
+                      onClick={() => signIn()}
                       className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
                     >
                       Registracija
@@ -196,7 +196,7 @@ export default function Hero() {
                 </p>
                 <div className="mt-8 flex gap-x-4 sm:justify-center">
                   <a
-                      onClick={() => signIn()}
+                    onClick={() => signIn()}
                     className="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
                   >
                     Preizkusi zdaj{' '}
@@ -208,7 +208,7 @@ export default function Hero() {
                     </span>
                   </a>
                   <a
-                      onClick={() => signIn()}
+                    onClick={() => signIn()}
                     className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
                   >
                     Prijava{' '}
