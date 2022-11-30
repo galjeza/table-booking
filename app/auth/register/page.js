@@ -5,7 +5,9 @@ export default function Page() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState('');
-  const [restaurantName, setRestaurantName] = useState('');
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -18,7 +20,9 @@ export default function Page() {
         email,
         password,
         passwordConfirm,
-        restaurantName
+        name,
+        lastName,
+        phone
       })
     });
     const data = await res.json();
@@ -54,19 +58,57 @@ export default function Page() {
             <form className="space-y-3" onSubmit={handleSubmit}>
               <div>
                 <label
-                  htmlFor="restaurantName"
+                  htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Ime restavracije
+                  Ime
                 </label>
                 <div className="mt-1">
                   <input
-                    value={restaurantName}
+                    value={name}
+                    onChange={event => setName(event.target.value)}
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Priimek
+                </label>
+                <div className="mt-1">
+                  <input
+                    value={lastName}
                     onChange={event =>
-                      setRestaurantName(event.target.value)
+                      setLastName(event.target.value)
                     }
-                    id="restaurantName"
-                    name="restaurantName"
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Telefonska številka
+                </label>
+                <div className="mt-1">
+                  <input
+                    value={phone}
+                    onChange={event => setPhone(event.target.value)}
+                    id="phone"
+                    name="phone"
                     type="text"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"

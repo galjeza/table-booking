@@ -1,38 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import { Fragment, useState } from 'react';
-import { Dialog, Switch, Transition } from '@headlessui/react';
-import {
-  BellIcon,
-  BriefcaseIcon,
-  ChatIcon,
-  CogIcon,
-  DocumentSearchIcon,
-  HomeIcon,
-  MenuAlt2Icon,
-  QuestionMarkCircleIcon,
-  UsersIcon,
-  XIcon
-} from '@heroicons/react/outline';
-import { SearchIcon } from '@heroicons/react/solid';
 
-const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: false },
-  { name: 'Jobs', href: '#', icon: BriefcaseIcon, current: false },
-  {
-    name: 'Applications',
-    href: '#',
-    icon: DocumentSearchIcon,
-    current: false
-  },
-  { name: 'Messages', href: '#', icon: ChatIcon, current: false },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Settings', href: '#', icon: CogIcon, current: true }
-];
-const secondaryNavigation = [
-  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
-  { name: 'Logout', href: '#', icon: CogIcon }
-];
 const tabs = [
   { name: 'Splošno', href: '#', current: true },
   { name: 'Geslo', href: '#', current: false },
@@ -44,9 +12,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 export default function Settings() {
-
-  
-  
   const { data: session } = useSession();
   console.log(session);
 
@@ -106,7 +71,9 @@ export default function Settings() {
                 Ime
               </dt>
               <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">{data?.user?.name} </span>
+                <span className="flex-grow">
+                  {session?.user?.name}{' '}
+                </span>
                 <span className="ml-4 flex-shrink-0">
                   <button
                     type="button"
@@ -117,22 +84,25 @@ export default function Settings() {
                 </span>
               </dd>
             </div>
-              <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                  <dt className="text-sm font-medium text-gray-500">
-                      Priimek
-                  </dt>
-                  <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      <span className="flex-grow"> {data?.user?.lastName}</span>
-                      <span className="ml-4 flex-shrink-0">
+            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt className="text-sm font-medium text-gray-500">
+                Priimek
+              </dt>
+              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span className="flex-grow">
+                  {' '}
+                  {session?.user?.lastName}
+                </span>
+                <span className="ml-4 flex-shrink-0">
                   <button
-                      type="button"
-                      className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    type="button"
+                    className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Posodobi
                   </button>
                 </span>
-                  </dd>
-              </div>
+              </dd>
+            </div>
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
               <dt className="text-sm font-medium text-gray-500">
                 Slika

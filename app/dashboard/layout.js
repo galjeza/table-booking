@@ -1,7 +1,7 @@
 'use client';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import {useRouter} from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 import {
   CalendarIcon,
@@ -33,19 +33,19 @@ const navigation = [
   { name: 'Nastavitve', href: '#', icon: CogIcon, current: false }
 ];
 
-import {useSession} from "next-auth/react";
+import { useSession } from 'next-auth/react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function DashboardLayout({ children }) {
-    const { data: session } = useSession();
-    const router = useRouter();
+  const { data: session } = useSession();
+  const router = useRouter();
 
-    if(!session) {
-        router.push('/dashboard/settings');
-    }
+  if (!session?.user) {
+    router.push('/api/auth/signin');
+  }
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>

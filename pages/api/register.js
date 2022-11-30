@@ -15,7 +15,9 @@ export default async function handle(req, res) {
     data: {
       email: req.body.email,
       password: req.body.password,
-      restaurantName: req.body.restaurantName
+      name: req.body.name,
+      lastName: req.body.lastName,
+      phone: req.body.phone
     }
   });
   return res.status(200).json(user);

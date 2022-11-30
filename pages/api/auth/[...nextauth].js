@@ -39,6 +39,8 @@ const authOptions = {
                 token.id = user.id;
                 token.name = user.name;
                 token.email = user.email;
+                token.lastName = user.lastName;
+                token.phone = user.phone;
             }
             return token;
         },
