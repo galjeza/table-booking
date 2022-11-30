@@ -1,7 +1,7 @@
 'use client';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 import {
   CalendarIcon,
@@ -41,10 +41,10 @@ function classNames(...classes) {
 
 export default function DashboardLayout({ children }) {
   const { data: session } = useSession();
-  const router = useRouter();
+  // const router = useRouter();
 
   if (!session?.user) {
-    router.push('/api/auth/signin');
+    // router.push('/api/auth/signin');
   }
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
