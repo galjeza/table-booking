@@ -3,12 +3,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {PrismaClient} from "@prisma/client";
 const prisma = new PrismaClient()
 const authOptions = {
-
     providers: [
         CredentialsProvider({
             name: "Credentials",
             async authorize(credentials, req) {
-                // Add logic here to look up the user from the credentials supplied
                 const user = await prisma.user.findUnique({
                     where: {
                         email: credentials.email
@@ -18,7 +16,6 @@ const authOptions = {
                     return user;
                 }
                 return null;
-
             }
         })
     ],
@@ -37,7 +34,6 @@ const authOptions = {
             if (token.id) {
                 session.id = token.id;
             }
-
             return session;
 
         },
