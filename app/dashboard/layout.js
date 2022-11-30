@@ -1,6 +1,8 @@
 'use client';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import {useRouter} from "next/navigation";
+
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -11,7 +13,7 @@ import {
   UsersIcon,
   XIcon
 } from '@heroicons/react/outline';
-
+import AuthContext from '../AuthContext';
 const navigation = [
   { name: 'Pregled', href: '#', icon: HomeIcon, current: true },
   {
@@ -31,11 +33,19 @@ const navigation = [
   { name: 'Nastavitve', href: '#', icon: CogIcon, current: false }
 ];
 
+import {useSession} from "next-auth/react";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function DashboardLayout({ children }) {
+    const { data: session } = useSession();
+    const router = useRouter();
+
+    if(!session) {
+        router.push('/dashboard/settings');
+    }
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
@@ -47,6 +57,7 @@ export default function DashboardLayout({ children }) {
         <body class="h-full">
         ```
       */}
+
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -247,7 +258,7 @@ export default function DashboardLayout({ children }) {
                 </h1>
               </div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                  {children}
+                {children}
               </div>
             </div>
           </main>

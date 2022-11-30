@@ -1,9 +1,9 @@
 import NextAuth, from "next-auth";
 import CredentialsProvider, from "next-auth/providers/credentials";
+import {PrismaClient} from "@prisma/client";
+const prisma = new PrismaClient()
 const authOptions = {
-    session: {
-        strategy: "jwt",
-    },
+
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
@@ -13,27 +13,51 @@ const authOptions = {
             // e.g. domain, username, password, 2FA token, etc.
             // You can pass any HTML attribute to the <input> tag through the object.
             credentials: {
-                username: { label: "Username", type: "text", placeholder: "jsmith" },
-                password: { label: "Password", type: "password" }
+                email: {label: "Email", type: "text", placeholder: "email"},
+                password: {label: "Geslo", type: "password"},
             },
             async authorize(credentials, req) {
                 // Add logic here to look up the user from the credentials supplied
-                const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+                const user = await prisma.user.findUnique({
+                    where: {
+                        email: credentials.email
 
-                if (user) {
-                    // Any object returned will be saved in `user` property of the JWT
-                    return user
-                } else {
-                    // If you return null then an error will be displayed advising the user to check their details.
-                    return null
+                    }
+                });
 
-                    // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+                if (user && user.password === credentials.password) {
+                    return user;
                 }
+                return null;
+
             }
         })
     ],
+    callbacks: {
+        jwt: async ({token, user}) => {
+            if(user){
+                token.id = user.id;
+                token.name = user.name;
+                token.email = user.email;
+            }
+            return token;
+        },
+        session: async ({session, token}) => {
+            if (token.id) {
+                session.id = token.id;
+            }
+
+            return session;
+
+        },
+    },
     pages: {
         signIn: "/auth/login/",
+    },
+    secret: "test",
+    jwt: {
+        secret: "test",
+        encryption: true,
     }
 }
 

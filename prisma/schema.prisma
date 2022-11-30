@@ -11,8 +11,10 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
+  phone String  @unique
   email String  @unique
-  restaurantName  String?
+  name  String?
+  lastname String?
   password String?
   role Role @default(USER)
 }

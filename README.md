@@ -16,6 +16,7 @@ npm run format:fix
 ```
 
 da zalaufaš prisma studio
+
 ```bash
 npx prisma studio
 ```
