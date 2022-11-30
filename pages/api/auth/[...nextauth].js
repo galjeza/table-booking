@@ -14,7 +14,6 @@ const authOptions = {
                         email: credentials.email
                     }
                 });
-
                 if (user && user.password === credentials.password) {
                     return user;
                 }
