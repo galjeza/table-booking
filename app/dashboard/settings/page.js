@@ -71,7 +71,7 @@ export default function Settings() {
                 Ime
               </dt>
               <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">{Gal} </span>
+                <span className="flex-grow">Gal </span>
                 <span className="ml-4 flex-shrink-0">
                   <button
                     type="button"
@@ -87,7 +87,7 @@ export default function Settings() {
                 Priimek
               </dt>
               <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow"> {Jeza}</span>
+                <span className="flex-grow"> Jeza</span>
                 <span className="ml-4 flex-shrink-0">
                   <button
                     type="button"
