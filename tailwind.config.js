@@ -8,11 +8,8 @@ module.exports = {
   theme: {
     extend: {}
   },
-  daisyui: {
-    themes: ['emerald']
-  },
+
   plugins: [
-    require('daisyui'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio')
   ]

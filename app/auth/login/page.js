@@ -1,5 +1,25 @@
 'use client';
+
+import {useState} from "react";
 export default function Page() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (event)=> {
+        event.preventDefault()
+        const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        })
+
+    }
   return (
     <>
       <div className="h-screen  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -18,7 +38,7 @@ export default function Page() {
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4  sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" action="app/auth/login/page#" method="POST">
               <div>
                 <label
                   htmlFor="email"
@@ -28,6 +48,8 @@ export default function Page() {
                 </label>
                 <div className="mt-1">
                   <input
+                      value={email}
+                        onChange={(e)=> setEmail(e.target.value)}
                     id="email"
                     name="email"
                     type="email"
@@ -48,6 +70,8 @@ export default function Page() {
                 <div className="mt-1">
                   <input
                     id="password"
+                    value={password}
+                    onChange={(e)=> setPassword(e.target.value)}
                     name="password"
                     type="password"
                     autoComplete="current-password"
@@ -75,7 +99,7 @@ export default function Page() {
 
                 <div className="text-sm">
                   <a
-                    href="#"
+                    href="app/auth/login/page#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Ste pozabili geslo?
