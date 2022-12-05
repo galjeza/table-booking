@@ -1,7 +1,7 @@
-'use client';
+"use client";
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { usePathname,useRouter } from 'next/navigation';
+import {useRouter} from 'next/router';
 import Link from 'next/link';
 
 import {
@@ -42,10 +42,7 @@ function classNames(...classes) {
 
 export default function DashboardLayout({ children }) {
   const { data: session } = useSession();
-  const pathname = usePathname();
   const router = useRouter();
-  const [currActivePath, setCurrActivePath] = useState(pathname);
-  
   if (!session) {
     router.push('/auth/login');
   }
