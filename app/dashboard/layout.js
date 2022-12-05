@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import {useRouter} from 'next/navigation';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 import {
   CalendarIcon,
@@ -34,8 +35,6 @@ const navigation = [
   { name: 'Nastavitve', href: '/dashboard/settings', icon: CogIcon }
 ];
 
-import { useSession } from 'next-auth/react';
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -44,13 +43,12 @@ export default function DashboardLayout({ children }) {
   const { data: session } = useSession();
   const [currActivePath, setCurrActivePath] = useState('Pregled');
   const router = useRouter();
-  if (!session) {
-    router.push('/auth/login');
-  }
+  console.log("Session: ", session);
+  console.log(session);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
-      <div class={"min-h-screen"}>
+      <div className={"min-h-screen"}>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -242,14 +240,10 @@ export default function DashboardLayout({ children }) {
                     <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                    {/* Replace with your content */}
                     <div className="py-4">
                         {children}
                     </div>
-                    {/* /End replace */}
                 </div>
-
-
             </div>
           </main>
         </div>
