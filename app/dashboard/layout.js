@@ -42,7 +42,7 @@ function classNames(...classes) {
 
 export default function DashboardLayout({ children }) {
   const { data: session } = useSession();
-  const [currActivePage, setCurrActivePage] = useState('Pregled');
+  const [currActivePath, setCurrActivePath] = useState('Pregled');
   const router = useRouter();
   if (!session) {
     router.push('/auth/login');
