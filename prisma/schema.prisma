@@ -8,6 +8,7 @@ datasource db {
   provider     = "mysql"
   url          = "mysql://7bz51ccwu26qggs8ppd0:pscale_pw_pId8waB48xo8UbCZVvyAm8zxKdZttqTc5vPWEUq1DS6@aws-eu-west-2.connect.psdb.cloud/table-booking?sslaccept=strict"
   relationMode = "prisma"
+  referentialIntegrity = "prisma"
 }
 
 model User {
@@ -18,6 +19,7 @@ model User {
   lastName String?
   password String?
   role Role @default(USER)
+  test String  @unique
 }
 
 model Restaurant {
