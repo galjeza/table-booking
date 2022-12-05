@@ -1,10 +1,12 @@
 generator client {
   provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+
 }
 
 datasource db {
   provider     = "mysql"
-  url          = 'mysql://7bz51ccwu26qggs8ppd0:pscale_pw_pId8waB48xo8UbCZVvyAm8zxKdZttqTc5vPWEUq1DS6@aws-eu-west-2.connect.psdb.cloud/table-booking?sslaccept=strict'
+  url          = "mysql://7bz51ccwu26qggs8ppd0:pscale_pw_pId8waB48xo8UbCZVvyAm8zxKdZttqTc5vPWEUq1DS6@aws-eu-west-2.connect.psdb.cloud/table-booking?sslaccept=strict"
   relationMode = "prisma"
 }
 
