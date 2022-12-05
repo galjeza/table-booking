@@ -1,33 +1,39 @@
+
+
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 
 }
 
 datasource db {
   provider     = "mysql"
-  url          = "mysql://9p2qtl5fd4wz5nc5l7gv:pscale_pw_A58uQaN1IRDdAUhO8pwYMmdQaqhvwTQD5vmX9j4nF7i@aws-eu-west-2.connect.psdb.cloud/table-booking?sslmode=require&sslcert=/etc/pki/tls/certs/ca-bundle.crt"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
+
 model User {
-  id    Int     @id @default(autoincrement())
-  phone String  @unique
-  email String  @unique
-  name  String?
-  lastName String?
+  id       Int     @id @default(autoincrement())
+  phone    String  @unique
+  email    String  @unique
+  name     String?
   password String?
-  role Role @default(USER)
-  test String  @unique @default("test")
+  role     Role    @default(USER)
+  lastName String?
+  test     String  @unique @default("test")
 }
 
 model Restaurant {
-  id    Int     @id @default(autoincrement())
-  name String
-  location  String?
+  id       Int     @id @default(autoincrement())
+  name     String
+  location String?
+  phone    String?
 }
 
-enum Role{
-    USER
-    ADMIN
+
+enum Role {
+  USER
+  ADMIN
 }
+
