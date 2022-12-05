@@ -1,7 +1,7 @@
 'use client';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { usePathname } from 'next/navigation';
+import { usePathname,useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import {
@@ -43,15 +43,11 @@ function classNames(...classes) {
 export default function DashboardLayout({ children }) {
   const { data: session } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
   const [currActivePath, setCurrActivePath] = useState(pathname);
-
-
-
-  console.log(pathname ==="/dashboard/settings");
-
-
+  
   if (!session) {
-    // router.push('/dashboard/settings');
+    router.push('/auth/login');
   }
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
