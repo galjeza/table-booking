@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import {useRouter} from 'next/navigation';
+import {useRouter,usePathname} from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
@@ -15,14 +15,13 @@ import {
   UsersIcon,
   XIcon
 } from '@heroicons/react/outline';
-import AuthContext from '../AuthContext';
+
 const navigation = [
   { name: 'Pregled', href: '/dashboard/overview', icon: HomeIcon },
   {
     name: 'Restavracije',
     href: '/dashboard/restaurants',
     icon: UsersIcon,
-
   },
   { name: 'Koledar', href: '/dashboard/calendar', icon: CalendarIcon },
   { name: 'Obvestila', href: '#', icon: InboxIcon },
@@ -30,7 +29,6 @@ const navigation = [
     name: 'Analitika',
     href: '/dashboard/analytics',
     icon: ChartBarIcon,
-
   },
   { name: 'Nastavitve', href: '/dashboard/settings', icon: CogIcon }
 ];
@@ -41,10 +39,11 @@ function classNames(...classes) {
 
 export default function DashboardLayout({ children }) {
   const { data: session } = useSession();
-  const [currActivePath, setCurrActivePath] = useState('Pregled');
+  const [currActivePath, setCurrActivePath] = useState(navigation[0]);
   const router = useRouter();
+  const pathname = usePathname();
   console.log("Session: ", session);
-  console.log(session);
+  console.log("Pathname: ", pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
@@ -177,7 +176,7 @@ export default function DashboardLayout({ children }) {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.href === currActivePath
+                      item === currActivePath
                         ? 'bg-gray-100 text-gray-900'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
@@ -185,7 +184,7 @@ export default function DashboardLayout({ children }) {
                   >
                     <item.icon
                       className={classNames(
-                        item.href === currActivePath
+                        item === currActivePath
                           ? 'text-gray-500'
                           : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-6 w-6'
