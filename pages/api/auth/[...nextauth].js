@@ -15,7 +15,7 @@ const authOptions = {
         if (user && user.password === credentials.password) {
           return user;
         }
-        return null;
+        return { error: 'Invalid email or password' };
       }
     })
   ],
@@ -40,7 +40,6 @@ const authOptions = {
   pages: {
     signIn: '/auth/login/'
   },
-  // set secret to env variable
   secret: process.env.NEXTAUTH_SECRET,
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,

@@ -6,6 +6,7 @@ import { signIn, useSession } from 'next-auth/react';
 export default function Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   //const router = useRouter();
 
   const { data: session } = useSession();
@@ -15,15 +16,18 @@ export default function Page() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    // TODO: add validation
 
     const res = await signIn('credentials', {
       email: email,
       password: password,
-      callbackUrl: '/dashboard/settings'
+        callbackUrl:`${window.location.origin}/dashboard/settings`,
     });
 
-    console.log(res);
+    if (res?.error) {
+        setError(res?.error);
+    }
+
+
   };
   return (
     <>
