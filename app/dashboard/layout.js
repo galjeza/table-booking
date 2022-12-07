@@ -1,3 +1,4 @@
+'use client';
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useRouter, usePathname } from 'next/navigation';

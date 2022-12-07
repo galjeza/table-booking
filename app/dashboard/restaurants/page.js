@@ -21,9 +21,6 @@ export default function Page() {
   return (
     <>
       <div>
-        <h3 className="text-lg leading-6 font-medium text-gray-900">
-          Restavracije
-        </h3>
         <div className="lg:hidden">
           <label htmlFor="selected-tab" className="sr-only">
             Select a tab
@@ -56,6 +53,12 @@ export default function Page() {
                   {tab.name}
                 </a>
               ))}
+              <button
+                type="button"
+                className="focus:outline-none ml-6 rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Dodaj rezevacijo
+              </button>
             </nav>
           </div>
         </div>
