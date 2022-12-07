@@ -6,8 +6,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function ModalForm({setModalOpen}) {
-  
+export default function ModalForm({ setModalOpen }) {
   const cancelButtonRef = useRef(null);
   return (
     <>
