@@ -1,7 +1,7 @@
-import prisma from "../../../lib/prisma";
+import index from "../../../lib/prisma";
 export default async (req, res) => {
   try {
-    const result = await prisma.user.findMany();
+    const result = await index.user.findMany();
     res.status(200).json(result);
   } catch (error) {
     res.status(403).json({ error: error.message });

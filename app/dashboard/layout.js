@@ -1,5 +1,5 @@
-"use client";
-import { Fragment, useState } from 'react';
+
+import {Fragment, useEffect, useState} from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import {useRouter,usePathname} from 'next/navigation';
 import Link from 'next/link';
@@ -24,7 +24,7 @@ const navigation = [
     icon: UsersIcon,
   },
   { name: 'Koledar', href: '/dashboard/calendar', icon: CalendarIcon },
-  { name: 'Obvestila', href: '#', icon: InboxIcon },
+  { name: 'Obvestila', href: '/dashboard/notifications', icon: InboxIcon },
   {
     name: 'Analitika',
     href: '/dashboard/analytics',
@@ -38,13 +38,12 @@ function classNames(...classes) {
 }
 
 export default function DashboardLayout({ children }) {
-  const { data: session } = useSession();
-  const [currActivePath, setCurrActivePath] = useState(navigation[0]);
+  const { data:session, status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
-  console.log("Session: ", session);
-  console.log("Pathname: ", pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
   return (
     <>
       <div className={"min-h-screen"}>
@@ -109,11 +108,10 @@ export default function DashboardLayout({ children }) {
                   <nav className="mt-5 px-2 space-y-1">
                     {navigation.map(item => (
                       <Link
-                          onClick={() => setCurrActivePath(item.href)}
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                            item.href === currActivePath
+                            item.href === pathname
                                 ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                           'group flex items-center px-2 py-2 text-base font-medium rounded-md'
@@ -121,7 +119,7 @@ export default function DashboardLayout({ children }) {
                       >
                         <item.icon
                           className={classNames(
-                              item.href === currActivePath
+                              item.href === pathname
                               ? 'text-gray-500'
                               : 'text-gray-400 group-hover:text-gray-500',
                             'mr-4 flex-shrink-0 h-6 w-6'
@@ -171,12 +169,11 @@ export default function DashboardLayout({ children }) {
               </div>
               <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
                 {navigation.map(item => (
-                  <a
-                      onClick={() => setCurrActivePath(item.href)}
+                  <Link
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item === currActivePath
+                      item.href === pathname
                         ? 'bg-gray-100 text-gray-900'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
@@ -184,7 +181,7 @@ export default function DashboardLayout({ children }) {
                   >
                     <item.icon
                       className={classNames(
-                        item === currActivePath
+                        item.href === pathname
                           ? 'text-gray-500'
                           : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-6 w-6'
@@ -192,7 +189,7 @@ export default function DashboardLayout({ children }) {
                       aria-hidden="true"
                     />
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
