@@ -1,7 +1,7 @@
 
 import {Fragment, useEffect, useState} from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import {useRouter,usePathname} from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
@@ -21,14 +21,14 @@ const navigation = [
   {
     name: 'Restavracije',
     href: '/dashboard/restaurants',
-    icon: UsersIcon,
+    icon: UsersIcon
   },
   { name: 'Koledar', href: '/dashboard/calendar', icon: CalendarIcon },
-  { name: 'Obvestila', href: '/dashboard/notifications', icon: InboxIcon },
+  { name: 'Obvestila', href: '#', icon: InboxIcon },
   {
     name: 'Analitika',
     href: '/dashboard/analytics',
-    icon: ChartBarIcon,
+    icon: ChartBarIcon
   },
   { name: 'Nastavitve', href: '/dashboard/settings', icon: CogIcon }
 ];
@@ -38,15 +38,18 @@ function classNames(...classes) {
 }
 
 export default function DashboardLayout({ children }) {
-  const { data:session, status } = useSession();
+  const { data: session } = useSession();
+  const [currActivePath, setCurrActivePath] = useState(navigation[0]);
   const router = useRouter();
   const pathname = usePathname();
+  console.log("Session: ", session);
+  console.log("Pathname: ", pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
   return (
     <>
-      <div className={"min-h-screen"}>
+      <div className={'min-h-screen'}>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -108,10 +111,11 @@ export default function DashboardLayout({ children }) {
                   <nav className="mt-5 px-2 space-y-1">
                     {navigation.map(item => (
                       <Link
+                          onClick={() => setCurrActivePath(item.href)}
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                            item.href === pathname
+                            item.href === currActivePath
                                 ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                           'group flex items-center px-2 py-2 text-base font-medium rounded-md'
@@ -119,7 +123,7 @@ export default function DashboardLayout({ children }) {
                       >
                         <item.icon
                           className={classNames(
-                              item.href === pathname
+                              item.href === currActivePath
                               ? 'text-gray-500'
                               : 'text-gray-400 group-hover:text-gray-500',
                             'mr-4 flex-shrink-0 h-6 w-6'
@@ -169,7 +173,8 @@ export default function DashboardLayout({ children }) {
               </div>
               <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
                 {navigation.map(item => (
-                  <Link
+                  <a
+                      onClick={() => setCurrActivePath(item.href)}
                     key={item.name}
                     href={item.href}
                     className={classNames(
@@ -232,14 +237,14 @@ export default function DashboardLayout({ children }) {
           </div>
           <main className="flex-1">
             <div className="py-6">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                    <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-                </div>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                    <div className="py-4">
-                        {children}
-                    </div>
-                </div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                <h1 className="text-2xl font-semibold text-gray-900">
+                  Dashboard
+                </h1>
+              </div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                <div className="py-4">{children}</div>
+              </div>
             </div>
           </main>
         </div>

@@ -8,7 +8,10 @@ const tabs = [
   { name: 'Ostalo', href: '#', current: false }
 ];
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon
+} from '@heroicons/react/solid';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -19,7 +22,6 @@ export default function Settings() {
 
   return (
     <>
-
       <div className="lg:hidden">
         <label htmlFor="selected-tab" className="sr-only">
           Select a tab

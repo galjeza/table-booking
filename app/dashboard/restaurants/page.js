@@ -1,5 +1,7 @@
 'use client';
 import ModalForm from './ModalForm';
+import { PlusSmIcon as PlusSmIconOutline } from '@heroicons/react/outline';
+import React, { useState } from 'react';
 
 const tabs = [
   {
@@ -15,6 +17,7 @@ function classNames(...classes) {
 }
 
 export default function Page() {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <>
       <div>
@@ -142,7 +145,15 @@ export default function Page() {
               </span>
             </dd>
           </div>
-          <ModalForm />
+          <button
+        type="button"
+        className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-50"
+        onClick={() => setModalOpen(true)}
+      >
+        <PlusSmIconOutline className="h-6 w-6" aria-hidden="true" />
+        <span className="flex-grow">Dodaj restavracijo</span>
+      </button>
+      {modalOpen && <ModalForm  setModalOpen={setModalOpen} />}
           {/*<div className="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
             <dt className="text-sm font-medium text-gray-500">
               Attachments

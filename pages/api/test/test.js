@@ -1,4 +1,4 @@
-import index from "../../../lib/prisma";
+import prisma from '../../../lib/prisma';
 export default async (req, res) => {
   try {
     const result = await index.user.findMany();

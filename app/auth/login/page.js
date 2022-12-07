@@ -11,7 +11,7 @@ export default function Page() {
 
   const { data: session } = useSession();
   if (session) {
-   // router.push('/dashboard/settings');
+    // router.push('/dashboard/settings');
   }
 
   const handleSubmit = async event => {
@@ -20,14 +20,12 @@ export default function Page() {
     const res = await signIn('credentials', {
       email: email,
       password: password,
-        callbackUrl:`${window.location.origin}/dashboard/settings`,
+      callbackUrl: `${window.location.origin}/dashboard/settings`
     });
 
     if (res?.error) {
-        setError(res?.error);
+      setError(res?.error);
     }
-
-
   };
   return (
     <>

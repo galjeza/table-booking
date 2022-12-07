@@ -1,30 +1,22 @@
 import React, { Fragment, useState, useRef } from 'react';
-import { PlusSmIcon as PlusSmIconOutline } from '@heroicons/react/outline';
+
 import { Dialog, Transition } from '@headlessui/react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function ModalForm() {
-  const [open, setOpen] = useState(false);
+export default function ModalForm({setModalOpen}) {
+  
   const cancelButtonRef = useRef(null);
   return (
     <>
-      <button
-        type="button"
-        className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-50"
-        onClick={() => setOpen(true)}
-      >
-        <PlusSmIconOutline className="h-6 w-6" aria-hidden="true" />
-        <span className="flex-grow">Dodaj restavracijo</span>
-      </button>
-      <Transition.Root show={open} as={Fragment}>
+      <Transition.Root show={true} as={Fragment}>
         <Dialog
           as="div"
           className="fixed z-10 inset-0 overflow-y-auto"
           initialFocus={cancelButtonRef}
-          onClose={setOpen}
+          onClose={setModalOpen}
         >
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <Transition.Child
@@ -207,14 +199,14 @@ export default function ModalForm() {
                   <button
                     type="button"
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setModalOpen(false)}
                   >
                     Dodaj
                   </button>
                   <button
                     type="button"
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setModalOpen(false)}
                     ref={cancelButtonRef}
                   >
                     Prekliči
