@@ -12,25 +12,100 @@ datasource db {
 
 
 model User {
-  id       Int     @id @default(autoincrement())
-  phone    String  @unique
-  email    String  @unique
-  name     String?
-  password String?
-  role     Role    @default(USER)
-  lastName String?
-  test     String  @unique @default("test")
+    id  Int     @id @default(autoincrement())
+    Name    String?
+    LastName String?
+    Email   String  @unique
+    PhoneNumber String  @unique
+    Type     UserType    @default(USER)
+    PasswordHash String @unique
+    PasswordSalt String @unique
+   
+    BookedLocation UserBookedLocation[]
+    OwnedLocation UserOwnLocation[]
 }
 
-model Restaurant {
-  id       Int     @id @default(autoincrement())
-  name     String
-  location String?
-  phone    String?
-}
-
-enum Role {
+enum UserType {
   USER
   ADMIN
 }
+
+model Location {
+  id       Int     @id @default(autoincrement())
+  Name     String?
+  Description String?
+  Phone    String?
+  UserBooked UserBookedLocation[]
+  UserOwned UserOwnLocation[]
+  LocationHours LocationHours[]
+
+  Street Street @relation(fields: [StreetId], references: [id])
+  StreetId Int
+}
+
+model LocationHours {
+    id Int @id @default(autoincrement())
+    DayInWeek Int?
+    OpenTime DateTime @default(now())
+    CloseTime DateTime @default(now())
+
+    Location Location @relation(fields: [LocationId], references: [id])
+    LocationId Int
+}
+
+model UserBookedLocation {
+    id Int @id @default(autoincrement())
+    DayInWeek Int?
+    StartTime DateTime @default(now())
+    Durration Int?
+
+    User User @relation(fields: [UserId], references: [id])
+    UserId Int
+
+    Location Location @relation(fields: [LocationId], references: [id])
+    LocationId Int
+}
+
+model UserOwnLocation {
+    id Int @id @default(autoincrement())
+    Privilage Type @default(USER)
+
+    User User @relation(fields: [UserId], references: [id])
+    UserId Int
+
+    Location Location @relation(fields: [LocationId], references: [id])
+    LocationId Int
+}
+
+enum Type {
+  USER
+  ADMIN
+  OWNER
+}
+
+model Street {
+    id Int @id @default(autoincrement())
+    Street String?
+    Location Location[]
+
+    Post Post @relation(fields: [PostId], references: [id])
+    PostId Int
+}
+
+model Post {
+    id Int @id @default(autoincrement())
+    Number Int?
+    Street Street[]
+
+    Country Country @relation(fields: [CountryId], references: [id])
+    CountryId Int
+}
+
+model Country {
+    id Int @id @default(autoincrement())
+    Name String?
+    Post Post[]
+}
+
+
 
