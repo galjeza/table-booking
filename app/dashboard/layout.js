@@ -28,7 +28,11 @@ const navigation = [
     href: '/dashboard/calendar',
     icon: CalendarIcon
   },
-  { name: 'Obvestila', href: '#', icon: InboxIcon },
+  {
+    name: 'Obvestila',
+    href: '/dashboard/notifications',
+    icon: InboxIcon
+  },
   {
     name: 'Analitika',
     href: '/dashboard/analytics',
