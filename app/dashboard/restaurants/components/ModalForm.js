@@ -6,7 +6,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function ModalForm({ setModalOpen }) {
+export default function ModalForm({
+  setModalOpen,
+  setIsEditing,
+  fields,
+  setFields,
+  isEditing
+}) {
   const cancelButtonRef = useRef(null);
   return (
     <>
@@ -49,7 +55,10 @@ export default function ModalForm({ setModalOpen }) {
                 <div className="mt-10 sm:mt-0">
                   <div className="md:grid md:grid-cols-2 md:gap-6">
                     <div className="mt-5 md:mt-0 md:col-span-2">
-                      <form action="#" method="POST">
+                      <form
+                        action="app/dashboard/restaurants/components/ModalForm#"
+                        method="POST"
+                      >
                         <div className="shadow overflow-hidden sm:rounded-md">
                           <div className="px-4 py-5 bg-white sm:p-6">
                             <div className="grid grid-cols-6 gap-6">
@@ -64,23 +73,14 @@ export default function ModalForm({ setModalOpen }) {
                                   type="text"
                                   name="first-name"
                                   id="first-name"
+                                  value={fields.naziv}
+                                  onChange={e => {
+                                    setFields({
+                                      ...fields,
+                                      naziv: e.target.value
+                                    });
+                                  }}
                                   autoComplete="given-name"
-                                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                />
-                              </div>
-
-                              <div className="col-span-6 sm:col-span-3">
-                                <label
-                                  htmlFor="last-name"
-                                  className="block text-sm font-medium text-gray-700"
-                                >
-                                  Last name
-                                </label>
-                                <input
-                                  type="text"
-                                  name="last-name"
-                                  id="last-name"
-                                  autoComplete="family-name"
                                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                 />
                               </div>
@@ -96,6 +96,13 @@ export default function ModalForm({ setModalOpen }) {
                                   type="text"
                                   name="email-address"
                                   id="email-address"
+                                  value={fields.telst}
+                                  onChange={e => {
+                                    setFields({
+                                      ...fields,
+                                      telst: e.target.value
+                                    });
+                                  }}
                                   autoComplete="email"
                                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                 />
@@ -112,6 +119,13 @@ export default function ModalForm({ setModalOpen }) {
                                   id="country"
                                   name="country"
                                   autoComplete="country-name"
+                                  value={fields.drzava}
+                                  onChange={e => {
+                                    setFields({
+                                      ...fields,
+                                      drzava: e.target.value
+                                    });
+                                  }}
                                   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 >
                                   <option>Slovenija</option>
@@ -131,6 +145,13 @@ export default function ModalForm({ setModalOpen }) {
                                   type="text"
                                   name="street-address"
                                   id="street-address"
+                                  value={fields.naslov}
+                                  onChange={e => {
+                                    setFields({
+                                      ...fields,
+                                      naslov: e.target.value
+                                    });
+                                  }}
                                   autoComplete="street-address"
                                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                 />
@@ -147,26 +168,18 @@ export default function ModalForm({ setModalOpen }) {
                                   type="text"
                                   name="city"
                                   id="city"
+                                  value={fields.mesto}
+                                  onChange={e => {
+                                    setFields({
+                                      ...fields,
+                                      mesto: e.target.value
+                                    });
+                                  }}
                                   autoComplete="address-level2"
                                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                 />
                               </div>
 
-                              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                <label
-                                  htmlFor="region"
-                                  className="block text-sm font-medium text-gray-700"
-                                >
-                                  State / Province
-                                </label>
-                                <input
-                                  type="text"
-                                  name="region"
-                                  id="region"
-                                  autoComplete="address-level1"
-                                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                />
-                              </div>
                               <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                                 <label
                                   htmlFor="postal-code"
@@ -178,6 +191,13 @@ export default function ModalForm({ setModalOpen }) {
                                   type="text"
                                   name="postal-code"
                                   id="postal-code"
+                                  value={fields.postnaSt}
+                                  onChange={e => {
+                                    setFields({
+                                      ...fields,
+                                      postnaSt: e.target.value
+                                    });
+                                  }}
                                   autoComplete="postal-code"
                                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                 />
@@ -200,7 +220,7 @@ export default function ModalForm({ setModalOpen }) {
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
                     onClick={() => setModalOpen(false)}
                   >
-                    Dodaj
+                    {isEditing ? 'Posodobi' : 'Dodaj'}
                   </button>
                   <button
                     type="button"
