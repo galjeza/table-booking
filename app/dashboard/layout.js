@@ -179,7 +179,7 @@ export default function DashboardLayout({ children }) {
               <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
                 {navigation.map(item => (
                   <a
-                      onClick={() => setCurrActivePath(item.href)}
+                    onClick={() => setCurrActivePath(item.href)}
                     key={item.name}
                     href={item.href}
                     className={classNames(
