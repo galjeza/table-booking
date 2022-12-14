@@ -28,7 +28,11 @@ const navigation = [
     href: '/dashboard/calendar',
     icon: CalendarIcon
   },
-  { name: 'Obvestila', href: '#', icon: InboxIcon },
+  {
+    name: 'Obvestila',
+    href: '/dashboard/notifications',
+    icon: InboxIcon
+  },
   {
     name: 'Analitika',
     href: '/dashboard/analytics',
@@ -178,8 +182,8 @@ export default function DashboardLayout({ children }) {
               </div>
               <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
                 {navigation.map(item => (
-                  <a
-                      onClick={() => setCurrActivePath(item.href)}
+                  <Link
+                    onClick={() => setCurrActivePath(item.href)}
                     key={item.name}
                     href={item.href}
                     className={classNames(
