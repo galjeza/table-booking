@@ -1,178 +1,297 @@
-'use client';
-// import { useSession } from 'next-auth/react';
+import Toggle from "../../components/form/Toggle";
+export default function SettingsPage() {
+    return (
+        <>
+            <div>
+                <div className="md:grid md:grid-cols-3 md:gap-6">
+                    <div className="md:col-span-1">
+                        <div className="px-4 sm:px-0">
+                            <h3 className="text-lg font-medium leading-6 text-gray-900">Splošno</h3>
+                            <p className="mt-1 text-sm text-gray-600">
+                                Te informacije so javne in jih lahko vidijo drugi uporabniki.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="mt-5 md:mt-0 md:col-span-2">
+                        <form action="#" method="POST">
+                            <div className="shadow sm:rounded-md sm:overflow-hidden">
+                                <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+                                    <div className="grid grid-cols-3 gap-6">
+                                        <div className="col-span-3 sm:col-span-2">
+                                            <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
+                                                Spletna stran
+                                            </label>
+                                            <div className="mt-1 flex rounded-md shadow-sm">
+                        <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                          http://
+                        </span>
+                                                <input
+                                                    type="text"
+                                                    name="company-website"
+                                                    id="company-website"
+                                                    className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                    placeholder="www.spletnastran.si"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
 
-const tabs = [
-  { name: 'Splošno', href: '#', current: true },
-  { name: 'Geslo', href: '#', current: false },
-  { name: 'Obvestila', href: '#', current: false },
-  { name: 'Ostalo', href: '#', current: false }
-];
+                                    <div>
+                                        <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+                                            O restavraciji
+                                        </label>
+                                        <div className="mt-1">
+                      <textarea
+                          id="about"
+                          name="about"
+                          rows={3}
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          placeholder="Bla bla bla bla"
+                          defaultValue={''}
+                      />
+                                        </div>
+                                        <p className="mt-2 text-sm text-gray-500">
+                                            Kratka predstavitev restavracije. Npr. kaj ponujate, kje ste, kaj je vaša specialnost, ...
+                                        </p>
+                                    </div>
 
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon
-} from '@heroicons/react/solid';
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">Slika</label>
+                                        <div className="mt-1 flex items-center">
+                      <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                        <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      </span>
+                                            <button
+                                                type="button"
+                                                className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            >
+                                                Uredi
+                                            </button>
+                                        </div>
+                                    </div>
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-export default function Settings() {
-  // const { data: session } = useSession();
-  //console.log(session);
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Slika za ozadje
+                                        </label>
+                                        <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                            <div className="space-y-1 text-center">
+                                                <svg
+                                                    className="mx-auto h-12 w-12 text-gray-400"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    viewBox="0 0 48 48"
+                                                    aria-hidden="true"
+                                                >
+                                                    <path
+                                                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                        strokeWidth={2}
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                    />
+                                                </svg>
+                                                <div className="flex text-sm text-gray-600">
+                                                    <label
+                                                        htmlFor="file-upload"
+                                                        className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                    >
+                                                        <span>Naložite fotografijo</span>
+                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                    </label>
+                                                    <p className="pl-1">ali jo povlecite sem.</p>
+                                                </div>
+                                                <p className="text-xs text-gray-500">PNG, JPG, GIF do 10MB</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                    <button
+                                        type="submit"
+                                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        Shrani
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-  return (
-    <>
-      <div className="lg:hidden">
-        <label htmlFor="selected-tab" className="sr-only">
-          Select a tab
-        </label>
-        <select
-          id="selected-tab"
-          name="selected-tab"
-          className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-          defaultValue={tabs.find(tab => tab.current).name}
-        >
-          {tabs.map(tab => (
-            <option key={tab.name}>{tab.name}</option>
-          ))}
-        </select>
-      </div>
-      <div className="hidden lg:block">
-        <div className="border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8">
-            {tabs.map(tab => (
-              <a
-                key={tab.name}
-                href={tab.href}
-                className={classNames(
-                  tab.current
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-                  'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm'
-                )}
-              >
-                {tab.name}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </div>
+            <div className="hidden sm:block" aria-hidden="true">
+                <div className="py-5">
+                    <div className="border-t border-gray-200" />
+                </div>
+            </div>
 
-      {/* Description list with inline editing */}
-      <div className="mt-10 divide-y divide-gray-200">
-        <div className="space-y-1">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Profil
-          </h3>
-          <p className="max-w-2xl text-sm text-gray-500">
-            Te informacije so javne in jih lahko vidijo drugi
-            uporabniki.
-          </p>
-        </div>
-        <div className="mt-6">
-          <dl className="divide-y divide-gray-200">
-            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt className="text-sm font-medium text-gray-500">
-                Ime
-              </dt>
-              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">Gal </span>
-                <span className="ml-4 flex-shrink-0">
-                  <button
-                    type="button"
-                    className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Posodobi
-                  </button>
-                </span>
-              </dd>
+            <div className="mt-10 sm:mt-0">
+                <div className="md:grid md:grid-cols-3 md:gap-6">
+                    <div className="md:col-span-1">
+                        <div className="px-4 sm:px-0">
+                            <h3 className="text-lg font-medium leading-6 text-gray-900">Osebne informacije</h3>
+                            <p className="mt-1 text-sm text-gray-600">Te podatke lahko vidite samo vi.</p>
+                        </div>
+                    </div>
+                    <div className="mt-5 md:mt-0 md:col-span-2">
+                        <form action="#" method="POST">
+                            <div className="shadow overflow-hidden sm:rounded-md">
+                                <div className="px-4 py-5 bg-white sm:p-6">
+                                    <div className="grid grid-cols-6 gap-6">
+                                        <div className="col-span-6 sm:col-span-3">
+                                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                                                Ime
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="first-name"
+                                                id="first-name"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            />
+                                        </div>
+
+                                        <div className="col-span-6 sm:col-span-3">
+                                            <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                                                Priimek
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="last-name"
+                                                id="last-name"
+                                                autoComplete="family-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            />
+                                        </div>
+
+                                        <div className="col-span-6 sm:col-span-4">
+                                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                                                Email
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="email-address"
+                                                id="email-address"
+                                                autoComplete="email"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            />
+                                        </div>
+
+                                        <div className="col-span-6 sm:col-span-3">
+                                            <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                                                Država
+                                            </label>
+                                            <select
+                                                id="country"
+                                                name="country"
+                                                autoComplete="country-name"
+                                                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            >
+                                                <option>Slovenija</option>
+                                                <option>Hrvaška</option>
+                                                <option>Italia</option>
+                                            </select>
+                                        </div>
+
+                                        <div className="col-span-6">
+                                            <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
+                                                Naslov
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="street-address"
+                                                id="street-address"
+                                                autoComplete="street-address"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            />
+                                        </div>
+
+                                        <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                                            <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                                                Mesto
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="city"
+                                                id="city"
+                                                autoComplete="address-level2"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            />
+                                        </div>
+
+
+
+                                        <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                                            <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+                                                Poštna številka
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="postal-code"
+                                                id="postal-code"
+                                                autoComplete="postal-code"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                    <button
+                                        type="submit"
+                                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        Shrani
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt className="text-sm font-medium text-gray-500">
-                Priimek
-              </dt>
-              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow"> Jeza</span>
-                <span className="ml-4 flex-shrink-0">
-                  <button
-                    type="button"
-                    className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Posodobi
-                  </button>
-                </span>
-              </dd>
+
+            <div className="hidden sm:block" aria-hidden="true">
+                <div className="py-5">
+                    <div className="border-t border-gray-200" />
+                </div>
             </div>
-            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-              <dt className="text-sm font-medium text-gray-500">
-                Slika
-              </dt>
-              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </span>
-                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
-                  <button
-                    type="button"
-                    className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Posodobi
-                  </button>
-                  <span className="text-gray-300" aria-hidden="true">
-                    |
-                  </span>
-                  <button
-                    type="button"
-                    className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Odstrani
-                  </button>
-                </span>
-              </dd>
+
+            <div className="mt-10 sm:mt-0">
+                <div className="md:grid md:grid-cols-3 md:gap-6">
+                    <div className="md:col-span-1">
+                        <div className="px-4 sm:px-0">
+                            <h3 className="text-lg font-medium leading-6 text-gray-900">Obvestila</h3>
+                            <p className="mt-1 text-sm text-gray-600">Kako vas naj obveščamo</p>
+                        </div>
+                    </div>
+                    <div className="mt-5 md:mt-0 md:col-span-2">
+                        <form action="#" method="POST">
+                            <div className="shadow overflow-hidden sm:rounded-md">
+                                <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+
+                                    <fieldset>
+
+                                                        <Toggle label={"Email obvestila"}  />
+
+                                    </fieldset>
+                                    <fieldset>
+                                        <Toggle label={"SMS obvestila"}  />
+                                    </fieldset>
+                                </div>
+                                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                    <button
+                                        type="submit"
+                                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        Shrani
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-              <dt className="text-sm font-medium text-gray-500">
-                Email
-              </dt>
-              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">
-                  chelsea.hagon@example.com
-                </span>
-                <span className="ml-4 flex-shrink-0">
-                  <button
-                    type="button"
-                    className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Posodobi
-                  </button>
-                </span>
-              </dd>
-            </div>
-            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
-              <dt className="text-sm font-medium text-gray-500">
-                Lokacija
-              </dt>
-              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span className="flex-grow">
-                  Valvasorjeva 1, 1000 Ljubljana
-                </span>
-                <span className="ml-4 flex-shrink-0">
-                  <button
-                    type="button"
-                    className="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Posodobi
-                  </button>
-                </span>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    )
 }
