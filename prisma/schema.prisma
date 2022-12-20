@@ -1,7 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
-
 }
 
 datasource db {
@@ -10,27 +9,73 @@ datasource db {
   relationMode = "prisma"
 }
 
-
 model User {
-  id       Int     @id @default(autoincrement())
-  phone    String  @unique
-  email    String  @unique
-  name     String?
-  password String?
-  role     Role    @default(USER)
-  lastName String?
-  test     String  @unique @default("test")
+  id           Int       @id @default(autoincrement())
+  Name         String?
+  LastName     String?
+  Email        String    @unique
+  PhoneNumber  String    @unique
+  Type         User_Type @default(USER)
+  PasswordHash String    @unique
+  PasswordSalt String    @unique
 }
 
-model Restaurant {
-  id       Int     @id @default(autoincrement())
-  name     String
-  location String?
-  phone    String?
+model Country {
+  id   Int     @id @default(autoincrement())
+  Name String?
 }
 
-enum Role {
+model Location {
+  id          Int     @id @default(autoincrement())
+  Name        String?
+  Description String?
+  Phone       String?
+  StreetId    Int
+}
+
+model LocationHours {
+  id         Int      @id @default(autoincrement())
+  DayInWeek  Int?
+  OpenTime   DateTime @default(now())
+  CloseTime  DateTime @default(now())
+  LocationId Int
+}
+
+model Post {
+  id        Int  @id @default(autoincrement())
+  Number    Int?
+  CountryId Int
+}
+
+model Street {
+  id     Int     @id @default(autoincrement())
+  Street String?
+  PostId Int
+}
+
+model UserBookedLocation {
+  id         Int      @id @default(autoincrement())
+  DayInWeek  Int?
+  StartTime  DateTime @default(now())
+  Durration  Int?
+  UserId     Int
+  LocationId Int
+}
+
+model UserOwnLocation {
+  id         Int                       @id @default(autoincrement())
+  Privilage  UserOwnLocation_Privilage @default(USER)
+  UserId     Int
+  LocationId Int
+}
+
+enum UserOwnLocation_Privilage {
+  USER
+  ADMIN
+  OWNER
+}
+
+enum User_Type {
   USER
   ADMIN
 }
-
