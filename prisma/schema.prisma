@@ -106,6 +106,3 @@ model Country {
     Name String?
     Post Post[]
 }
-
-
-
