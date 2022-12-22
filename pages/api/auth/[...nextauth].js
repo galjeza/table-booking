@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+const bcrypt = require('bcrypt');
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 const authOptions = {
@@ -12,10 +13,25 @@ const authOptions = {
             email: credentials.email
           }
         });
+
+        if (!user) {
+          return { error: 'Invalid email or password' };
+        }
+
+        /*
         if (user && user.password === credentials.password) {
           return user;
         }
-        return { error: 'Invalid email or password' };
+        */
+
+        bcrypt.compare(credentials.password, user.PasswordHash, (err, matched) => {
+          if (err) return {error: 'Error'};
+          if (!matched) return {error: 'Invalid email or password'};
+
+          if(matched){
+            return user;
+          }
+        })
       }
     })
   ],
