@@ -68,6 +68,9 @@ model UserBooked {
     StartTime DateTime @default(now())
     Durration Int?
 
+    /// User can book multiple Tables
+    TablesBooked BookedTablesAtLocation[]
+
     /// Multiple Bookings can have same user
     User User @relation(fields: [UserId], references: [id])
     UserId Int
@@ -78,6 +81,9 @@ model TableAtLocation {
     NumberOfSeats Int
     IsBooked Boolean @default(false)
 
+    /// One table can be booked at a time
+    BookedAtLocation BookedTablesAtLocation?
+
     /// Multiple Tables can be owned by same Location
     Location Location @relation(fields: [LocationId], references: [id])
     LocationId Int
@@ -86,13 +92,13 @@ model TableAtLocation {
 model BookedTablesAtLocation {
     id Int @id @default(autoincrement())
 
-    /// Multiple Tables can have same UserBooked
-    UserBooked UserBookedTablesAtLocation @relation(fields: [UserBookedId], references: [id])
+    /// Multiple Booked Tables can have same UserBooked
+    UserBooked UserBooked @relation(fields: [UserBookedId], references: [id])
     UserBookedId Int
 
-    /// Gets Id of Table from restauraunt
+    /// Tables can be booked from same Location
     Table TableAtLocation @relation(fields: [TableId], references: [id])
-    TableId Int
+    TableId Int @unique
 }
 
 model UserOwnLocation {
