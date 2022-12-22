@@ -46,15 +46,19 @@ function classNames(...classes) {
 }
 
 export default function DashboardLayout({ children }) {
-  const { data: session } = useSession();
+  const { data:session } = useSession();
   const [currActivePath, setCurrActivePath] = useState(
     navigation[0]
   );
   const router = useRouter();
   const pathname = usePathname();
-  console.log('Session: ', session);
-  console.log('Pathname: ', pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  if (!session) {
+      return <h1>
+          Nisi prijavljen kaj delaš tukaj?
+      </h1>
+  }
 
   return (
     <>

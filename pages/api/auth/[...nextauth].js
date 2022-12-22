@@ -3,6 +3,11 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 const bcrypt = require('bcrypt');
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+
+function verifyPassword(credentials, user) {
+    return bcrypt.compare(credentials.password, user.PasswordHash);
+}
+
 const authOptions = {
   providers: [
     CredentialsProvider({
@@ -10,44 +15,32 @@ const authOptions = {
       async authorize(credentials, req) {
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email
+            Email: credentials.email
           }
         });
 
         if (!user) {
-          return { error: 'Invalid email or password' };
+            return null;
         }
 
-        /*
-        if (user && user.password === credentials.password) {
-          return user;
+        const isValid = await verifyPassword(credentials, user);
+        if (!isValid) {
+            return null;
         }
-        */
 
-        bcrypt.compare(
-          credentials.password,
-          user.PasswordHash,
-          (err, matched) => {
-            if (err) return { error: 'Error' };
-            if (!matched)
-              return { error: 'Invalid email or password' };
-
-            if (matched) {
-              return user;
-            }
-          }
-        );
-      }
+        return user
+        }
     })
+
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
-        token.name = user.name;
-        token.email = user.email;
-        token.lastName = user.lastName;
-        token.phone = user.phone;
+        token.name = user.Name;
+        token.email = user.Email;
+        token.lastName = user.LastName;
+        token.phone = user.PhoneNumber;
       }
       return token;
     },

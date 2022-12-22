@@ -1,17 +1,17 @@
 'use client';
 import { useState } from 'react';
-// import { useRouter } from 'next/navigation';
+ import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 
 export default function Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  //const router = useRouter();
+  const router = useRouter();
 
   const { data: session } = useSession();
   if (session) {
-    // router.push('/dashboard/settings');
+     router.push('/dashboard/protected');
   }
 
   const handleSubmit = async event => {
@@ -20,12 +20,8 @@ export default function Page() {
     const res = await signIn('credentials', {
       email: email,
       password: password,
-      callbackUrl: `${window.location.origin}/dashboard/settings`
     });
 
-    if (res?.error) {
-      setError(res?.error);
-    }
   };
   return (
     <>
