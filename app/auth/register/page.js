@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 export default function Page() {
-    const router = useRouter();
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -28,13 +28,13 @@ export default function Page() {
       })
     });
     const data = await res.json();
-    console.log("DATA", data);
+    console.log('DATA', data);
     if (res.status === 200) {
-        console.log("Registracija uspešna");
-        router.push('/auth/login');
+      console.log('Registracija uspešna');
+      router.push('/auth/login');
     } else {
       //setError(data.error);
-      console.log("NAPAKAKAKAK");
+      console.log('NAPAKAKAKAK');
     }
   };
 
@@ -193,7 +193,6 @@ export default function Page() {
             </form>
           </div>
         </div>
-
       </div>
     </>
   );

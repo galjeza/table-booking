@@ -22,7 +22,6 @@ npx prisma studio
 
 ```
 
-
 da se povežeš na development database(za to si morš prenest pscale CLI)
 
 ```bash

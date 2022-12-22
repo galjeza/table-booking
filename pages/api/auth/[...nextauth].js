@@ -24,14 +24,19 @@ const authOptions = {
         }
         */
 
-        bcrypt.compare(credentials.password, user.PasswordHash, (err, matched) => {
-          if (err) return {error: 'Error'};
-          if (!matched) return {error: 'Invalid email or password'};
+        bcrypt.compare(
+          credentials.password,
+          user.PasswordHash,
+          (err, matched) => {
+            if (err) return { error: 'Error' };
+            if (!matched)
+              return { error: 'Invalid email or password' };
 
-          if(matched){
-            return user;
+            if (matched) {
+              return user;
+            }
           }
-        })
+        );
       }
     })
   ],

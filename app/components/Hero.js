@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { XIcon, MenuIcon } from '@heroicons/react/outline';
 import { signIn } from 'next-auth/react';
-import Link from "next/link";
+import Link from 'next/link';
 
 const navigation = [
   { name: 'Blog', href: '#blog' },
@@ -84,7 +84,7 @@ export default function Hero() {
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
               <Link
-                href={"/auth/register"}
+                href={'/auth/register'}
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 bg-indigo-600 text-white shadow-sm ring-1  hover:bg-indigo-700"
               >
                 Registracija
