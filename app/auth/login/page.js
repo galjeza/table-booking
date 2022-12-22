@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
- import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 
 export default function Page() {
@@ -11,7 +11,7 @@ export default function Page() {
 
   const { data: session } = useSession();
   if (session) {
-     router.push('/dashboard/protected');
+    router.push('/dashboard/protected');
   }
 
   const handleSubmit = async event => {
@@ -19,9 +19,8 @@ export default function Page() {
 
     const res = await signIn('credentials', {
       email: email,
-      password: password,
+      password: password
     });
-
   };
   return (
     <>
