@@ -114,13 +114,7 @@ export default function DashboardLayout({ children }) {
                   </div>
                 </Transition.Child>
                 <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-                  <div className="flex-shrink-0 flex items-center px-4">
-                    <img
-                      className="h-8 w-auto"
-                      src="/LogoBig.svg"
-                      alt="Workflow"
-                    />
-                  </div>
+
                   <nav className="mt-5 px-2 space-y-1">
                     {navigation.map(item => (
                       <Link
@@ -151,13 +145,7 @@ export default function DashboardLayout({ children }) {
                 <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
                   <a href="#" className="flex-shrink-0 group block">
                     <div className="flex items-center">
-                      <div>
-                        <img
-                          className="inline-block h-10 w-10 rounded-full"
-                          src="https://images.pexels.com/photos/1197132/pexels-photo-1197132.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
-                          alt=""
-                        />
-                      </div>
+                      
                       <div className="ml-3">
                         <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
                           {}

@@ -43,10 +43,23 @@ const authOptions = {
       return token;
     },
     session: async ({ session, token }) => {
-      if (token.id) {
-        session.id = token.id;
+      if (!session) {
+        return;
       }
-      return session;
+
+      const user = await prisma.user.findUnique({
+        where: {
+          Email: token.email
+        }
+      });
+
+      session.user.name = user.Name;
+      session.user.email = user.Email;
+      session.user.lastName = user.LastName;
+      session.user.phone= user.PhoneNumber;
+      session.user.id = user.id;
+
+      return Promise.resolve(session);
     }
   },
   pages: {
