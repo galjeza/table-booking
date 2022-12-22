@@ -6,7 +6,6 @@ import {
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
-
 export default function Calendar({ days }) {
   return (
     <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">

@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
+import {useRouter} from 'next/navigation';
 export default function Page() {
+    const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -26,13 +28,13 @@ export default function Page() {
       })
     });
     const data = await res.json();
-    console.log('Dobil sem reponse yeey');
-    // check if status is 200
+    console.log("DATA", data);
     if (res.status === 200) {
-      // window.location.href = '/auth/login';
+        console.log("Registracija uspešna");
+        router.push('/auth/login');
     } else {
-      setError(data.error);
-      console.log(data.error);
+      //setError(data.error);
+      console.log("NAPAKAKAKAK");
     }
   };
 
@@ -46,7 +48,7 @@ export default function Page() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Ustvarite račiun{' '}
+            Ustvarite račun{' '}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Vnesite podatke iz začnite z uporabo aplikacije.
@@ -191,6 +193,7 @@ export default function Page() {
             </form>
           </div>
         </div>
+
       </div>
     </>
   );

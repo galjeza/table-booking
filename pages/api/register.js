@@ -1,9 +1,10 @@
 import { PrismaClient } from '@prisma/client';
+const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
 export default async function handle(req, res) {
   const existingUser = await prisma.user.findUnique({
     where: {
-      email: req.body.email
+      Email: req.body.email
     }
   });
   if (existingUser) {
@@ -70,13 +71,17 @@ export default async function handle(req, res) {
     res.status(400).json({ error: 'Vnesite veljaven email naslov' });
     return;
   }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
   const user = await prisma.user.create({
     data: {
-      email: req.body.email,
-      password: req.body.password,
-      name: req.body.name,
-      lastName: req.body.lastName,
-      phone: req.body.phone
+        Email: req.body.email,
+        PasswordHash: hashedPassword,
+        Name : req.body.name,
+        LastName : req.body.lastName,
+        PhoneNumber : req.body.phone,
+        PasswordSalt: salt,
     }
   });
   return res.status(200).json(user);
