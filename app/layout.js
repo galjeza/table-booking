@@ -6,7 +6,7 @@ export default function RootLayout({ children }) {
     <AuthContext>
       <html className="h-full">
         <head />
-        <body className="h-full">{children}</body>
+        <body className="h-full bg-gray-50">{children}</body>
       </html>
     </AuthContext>
   );
