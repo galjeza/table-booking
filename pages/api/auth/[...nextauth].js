@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 function verifyPassword(credentials, user) {
-    return bcrypt.compare(credentials.password, user.PasswordHash);
+  return bcrypt.compare(credentials.password, user.PasswordHash);
 }
 
 const authOptions = {
@@ -20,24 +20,25 @@ const authOptions = {
         });
 
         if (!user) {
-            return null;
+          return null;
         }
 
         const isValid = await verifyPassword(credentials, user);
         if (!isValid) {
-            return null;
+          return null;
         }
 
-        return user
-        }
+        return user;
+      }
     })
-
   ],
   callbacks: {
-    jwt: async ({ token, user}) => {
+    jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
         token.name = user.Name;
+        token.email = user.Email;
+        token.lastName = user.LastName;
       }
       return token;
     },

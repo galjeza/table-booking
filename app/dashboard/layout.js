@@ -46,7 +46,7 @@ function classNames(...classes) {
 }
 
 export default function DashboardLayout({ children }) {
-  const { data:session } = useSession();
+  const { data: session } = useSession();
   const [currActivePath, setCurrActivePath] = useState(
     navigation[0]
   );
@@ -55,9 +55,7 @@ export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   if (!session) {
-      return <h1>
-          Nisi prijavljen kaj delaš tukaj?
-      </h1>
+    return <h1>Nisi prijavljen kaj delaš tukaj?</h1>;
   }
 
   console.log(session.user);
@@ -162,9 +160,7 @@ export default function DashboardLayout({ children }) {
                       </div>
                       <div className="ml-3">
                         <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                            {
-
-                            }
+                          {}
                         </p>
                         <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                           Poglej profil
@@ -230,7 +226,9 @@ export default function DashboardLayout({ children }) {
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                        {session.user.name + " "+ session.user.lastName}
+                      {session.user.name +
+                        ' ' +
+                        session.user.lastName}
                     </p>
                     <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
                       Poglej profil
