@@ -34,13 +34,10 @@ const authOptions = {
 
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user}) => {
       if (user) {
         token.id = user.id;
         token.name = user.Name;
-        token.email = user.Email;
-        token.lastName = user.LastName;
-        token.phone = user.PhoneNumber;
       }
       return token;
     },

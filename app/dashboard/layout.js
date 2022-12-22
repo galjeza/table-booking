@@ -60,6 +60,8 @@ export default function DashboardLayout({ children }) {
       </h1>
   }
 
+  console.log(session.user);
+
   return (
     <>
       <div className={'min-h-screen'}>
@@ -160,7 +162,9 @@ export default function DashboardLayout({ children }) {
                       </div>
                       <div className="ml-3">
                         <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                          Matic Lukežič
+                            {
+
+                            }
                         </p>
                         <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                           Poglej profil
@@ -226,7 +230,7 @@ export default function DashboardLayout({ children }) {
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      Matic Lukežič
+                        {session.user.name + " "+ session.user.lastName}
                     </p>
                     <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
                       Poglej profil
