@@ -18,27 +18,37 @@ model User {
     Type     UserType    @default(USER)
     PasswordHash String @unique
     PasswordSalt String @unique
-   
-    BookedLocation UserBookedLocation[]
+
+    /// Same User can have multiple Bookings
+    BookedLocation UserBooked[]
+
+    /// Same User can have own multiple locations
     OwnedLocation UserOwnLocation[]
 }
 
 enum UserType {
-  USER
-  ADMIN
+    USER
+    ADMIN
 }
 
 model Location {
-  id       Int     @id @default(autoincrement())
-  Name     String?
-  Description String?
-  Phone    String?
-  UserBooked UserBookedLocation[]
-  UserOwned UserOwnLocation[]
-  LocationHours LocationHours[]
+    id Int @id @default(autoincrement())
+    Name String?
+    Description String?
+    Phone String?
 
-  Street Street @relation(fields: [StreetId], references: [id])
-  StreetId Int
+    /// Same Location can have own multiple Tables
+    Tables TableAtLocation[]
+
+    /// Same Location be owned by multiple people
+    UserOwned UserOwnLocation[]
+
+    /// Same Location have multiple schedules
+    LocationHours LocationHours[]
+
+    /// Multiple Locations can be on same street
+    Street Street @relation(fields: [StreetId], references: [id])
+    StreetId Int
 }
 
 model LocationHours {
@@ -47,45 +57,71 @@ model LocationHours {
     OpenTime DateTime @default(now())
     CloseTime DateTime @default(now())
 
+    /// Multiple Schedules can for the same Location
     Location Location @relation(fields: [LocationId], references: [id])
     LocationId Int
 }
 
-model UserBookedLocation {
+model UserBooked {
     id Int @id @default(autoincrement())
     DayInWeek Int?
     StartTime DateTime @default(now())
     Durration Int?
 
+    /// Multiple Bookings can have same user
     User User @relation(fields: [UserId], references: [id])
     UserId Int
+}
 
+model TableAtLocation {
+    id Int @id @default(autoincrement())
+    NumberOfSeats Int
+    IsBooked Boolean @default(false)
+
+    /// Multiple Tables can be owned by same Location
     Location Location @relation(fields: [LocationId], references: [id])
     LocationId Int
+}
+
+model BookedTablesAtLocation {
+    id Int @id @default(autoincrement())
+
+    /// Multiple Tables can have same UserBooked
+    UserBooked UserBookedTablesAtLocation @relation(fields: [UserBookedId], references: [id])
+    UserBookedId Int
+
+    /// Gets Id of Table from restauraunt
+    Table TableAtLocation @relation(fields: [TableId], references: [id])
+    TableId Int
 }
 
 model UserOwnLocation {
     id Int @id @default(autoincrement())
     Privilage Type @default(USER)
 
+    /// Multiple Users can be part of same UserOwnLocation
     User User @relation(fields: [UserId], references: [id])
     UserId Int
 
+    /// Multiple Locations can be part of same UserOwnLocation
     Location Location @relation(fields: [LocationId], references: [id])
     LocationId Int
 }
 
 enum Type {
-  USER
-  ADMIN
-  OWNER
+    USER
+    ADMIN
+    OWNER
 }
 
 model Street {
     id Int @id @default(autoincrement())
     Street String?
+
+    /// Street address can contain multiple Businesses
     Location Location[]
 
+    /// Multiple Streets can be part of same Post
     Post Post @relation(fields: [PostId], references: [id])
     PostId Int
 }
@@ -93,8 +129,11 @@ model Street {
 model Post {
     id Int @id @default(autoincrement())
     Number Int?
+
+    /// Post can span multiple Streets
     Street Street[]
 
+    /// Multiple Posts can be from same Country
     Country Country @relation(fields: [CountryId], references: [id])
     CountryId Int
 }
@@ -102,5 +141,7 @@ model Post {
 model Country {
     id Int @id @default(autoincrement())
     Name String?
+
+    /// Country can have multiple Posts
     Post Post[]
 }
