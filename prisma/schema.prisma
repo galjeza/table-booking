@@ -37,6 +37,10 @@ model Location {
     Description String?
     Phone String?
 
+    //Atrubites for Address
+    Street String?
+    Country String?
+
     /// Same Location can have own multiple Tables
     Tables TableAtLocation[]
 
@@ -45,10 +49,6 @@ model Location {
 
     /// Same Location have multiple schedules
     LocationHours LocationHours[]
-
-    /// Multiple Locations can be on same street
-    Street Street @relation(fields: [StreetId], references: [id])
-    StreetId Int
 }
 
 model LocationHours {
@@ -118,36 +118,4 @@ enum Type {
     USER
     ADMIN
     OWNER
-}
-
-model Street {
-    id Int @id @default(autoincrement())
-    Street String?
-
-    /// Street address can contain multiple Businesses
-    Location Location[]
-
-    /// Multiple Streets can be part of same Post
-    Post Post @relation(fields: [PostId], references: [id])
-    PostId Int
-}
-
-model Post {
-    id Int @id @default(autoincrement())
-    Number Int?
-
-    /// Post can span multiple Streets
-    Street Street[]
-
-    /// Multiple Posts can be from same Country
-    Country Country @relation(fields: [CountryId], references: [id])
-    CountryId Int
-}
-
-model Country {
-    id Int @id @default(autoincrement())
-    Name String?
-
-    /// Country can have multiple Posts
-    Post Post[]
 }
