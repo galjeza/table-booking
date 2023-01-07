@@ -56,7 +56,7 @@ const authOptions = {
       session.user.name = user.Name;
       session.user.email = user.Email;
       session.user.lastName = user.LastName;
-      session.user.phone= user.PhoneNumber;
+      session.user.phone = user.PhoneNumber;
       session.user.id = user.id;
 
       return Promise.resolve(session);

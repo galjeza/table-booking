@@ -119,7 +119,6 @@ export default function DashboardLayout({ children }) {
                   </div>
                 </Transition.Child>
                 <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-
                   <nav className="mt-5 px-2 space-y-1">
                     {navigation.map(item => (
                       <Link
@@ -150,7 +149,6 @@ export default function DashboardLayout({ children }) {
                 <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
                   <a href="#" className="flex-shrink-0 group block">
                     <div className="flex items-center">
-                      
                       <div className="ml-3">
                         <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
                           {}

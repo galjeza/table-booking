@@ -23,15 +23,23 @@ model User {
 }
 
 model Location {
-  id            Int               @id @default(autoincrement())
-  Name          String?
-  Description   String?
-  Phone         String?
-  StreetId      Int
-  Tables        TableAtLocation[]
-  UserOwned     UserOwnLocation[]
-  LocationHours LocationHours[]
-  Street        Street            @relation(fields: [StreetId], references: [id])
+    id Int @id @default(autoincrement())
+    Name String?
+    Description String?
+    Phone String?
+
+    //Atrubites for Address
+    Street String?
+    Country String?
+
+    /// Same Location can have own multiple Tables
+    Tables TableAtLocation[]
+
+    /// Same Location be owned by multiple people
+    UserOwned UserOwnLocation[]
+
+    /// Same Location have multiple schedules
+    LocationHours LocationHours[]
 }
 
 model LocationHours {
@@ -79,35 +87,8 @@ model UserOwnLocation {
   Location   Location @relation(fields: [LocationId], references: [id])
 }
 
-model Street {
-  id       Int        @id @default(autoincrement())
-  Street   String?
-  PostId   Int
-  Location Location[]
-  Post     Post       @relation(fields: [PostId], references: [id])
-}
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  Number    Int?
-  CountryId Int
-  Street    Street[]
-  Country   Country  @relation(fields: [CountryId], references: [id])
-}
-
-model Country {
-  id   Int     @id @default(autoincrement())
-  Name String?
-  Post Post[]
-}
-
-enum UserType {
-  USER
-  ADMIN
-}
-
 enum Type {
-  USER
-  ADMIN
-  OWNER
+    USER
+    ADMIN
+    OWNER
 }
