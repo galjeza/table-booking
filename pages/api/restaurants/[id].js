@@ -7,5 +7,13 @@ export default async function handler(req, res) {
             id: parseInt(req.query.id)
         }
     })
-    res.json(restaurant)
+
+    const tables = await prisma.table.findMany({
+        where: {
+            restaurantId: parseInt(req.query.id)
+        }
+    }
+    )
+
+    res.json({...restaurant, tables})
 }

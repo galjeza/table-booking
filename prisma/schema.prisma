@@ -55,6 +55,7 @@ model Table {
   id           Int           @id @default(autoincrement())
   number       Int
   restaurant   Restaurant    @relation(fields: [restaurantId], references: [id])
+  capacity     Int
   restaurantId Int
   reservations Reservation[]
 }

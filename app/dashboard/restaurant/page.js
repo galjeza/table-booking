@@ -54,6 +54,7 @@ const Page = () => {
             const restaurantId = session?.user?.restaurantId
             const res = await fetch(`/api/restaurants/${restaurantId}`)
             const data = await res.json()
+            console.log(data)
             setRestaurant(data)
         }
 
