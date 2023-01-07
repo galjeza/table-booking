@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useSession,signOut } from 'next-auth/react';
 
 import {
   CalendarIcon,
@@ -54,11 +54,16 @@ export default function DashboardLayout({ children }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (!session) {
-    return <h1>Nisi prijavljen kaj delaš tukaj?</h1>;
-  }
+  // check if user is logged in
+    useEffect(() => {
+        if (!session) {
+            router.push('/auth/login');
+        }
+    }
+    , [session]);
 
-  console.log(session.user);
+    const userImageSrc = "https://avatars.dicebear.com/api/croodles-neutral/" + session?.user.email + ".svg";
+
 
   return (
     <>
@@ -207,19 +212,19 @@ export default function DashboardLayout({ children }) {
                 <div className="flex items-center">
                   <div>
                     <img
-                      className="inline-block h-9 w-9 rounded-full"
-                      src="https://images.pexels.com/photos/1197132/pexels-photo-1197132.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
+                      className="inline-block h-9 w-9 rounded-full border-indigo-500 border-2"
+                      src={userImageSrc}
                       alt=""
                     />
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      {session.user.name +
+                      {session?.user.name +
                         ' ' +
-                        session.user.lastName}
+                        session?.user.lastName}
                     </p>
-                    <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                      Poglej profil
+                    <p className="text-sm font-medium text-gray-500 group-hover:text-red-600 group-hover:text-red-500">
+                     Odjava
                     </p>
                   </div>
                 </div>
