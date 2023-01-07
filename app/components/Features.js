@@ -8,10 +8,10 @@ import {
 
 const features = [
   {
-    name: 'Naročanje 24/7',
+    name: 'Rezervacije 24/7',
     icon: ClockIcon,
     description:
-      'Omogočite strankam fleksibilno naročanje 24 ur na dan, vse dni v tednu s pomočjo enostavnih spletnih form!'
+      'Omogočite strankam fleksibilno rezerviranje 24 ur na dan, vse dni v tednu s pomočjo enostavnih spletnih form!'
   },
   {
     name: 'Napredna analitika',

@@ -44,11 +44,13 @@ model Restaurant {
 
 model Reservation {
   id        Int      @id @default(autoincrement())
-  startTime DateTime
-  endTime   DateTime
+  startTime String
+  endTime   String
   table     Table    @relation(fields: [tableId], references: [id])
+  date      String
   tableId   Int
   partySize Int
+  customer String
 }
 
 model Table {

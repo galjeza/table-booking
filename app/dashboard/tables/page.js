@@ -13,12 +13,15 @@ const TableList = () => {
             const restaurantId = session?.user?.restaurantId
             const res = await fetch(`/api/restaurants/${restaurantId}`)
             const data = await res.json()
-            console.log(data)
-            setTables(data.tables)
+            let tablesCopy = data.tables
+            tablesCopy.sort((a, b) => a.number - b.number)
+            setTables(tablesCopy)
         }
 
         fetchData()
     }, [session])
+
+
 
     if (!tables.length) {
         return <div className="text-center py-12">Loading...</div>
@@ -26,9 +29,7 @@ const TableList = () => {
     // render tables as cards with delete button and at the end of the list add a button to add a new table, each table has a number and a capacity
     return (
         <>
-
             <AddTableModal restaurantId={session?.user?.restaurantId} tables={tables} setTables={setTables} />
-
         <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -37,11 +38,11 @@ const TableList = () => {
                             <thead className="bg-gray-50">
                             <tr>
                                 <th scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500  tracking-wider">
                                     Številka mize
                                 </th>
                                 <th scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500  tracking-wider">
                                     Kapaciteta
                                 </th>
                                 <th scope="col" className="relative px-6 py-3">
@@ -80,7 +81,7 @@ const TableList = () => {
                                                 setTables(tables.filter(t => t.id !== data.id))
                                             }
                                             deleteTable()
-                                        }} className="text-indigo-600 hover:text-indigo-900">Izbriši</a>
+                                        }} className="text-indigo-600 hover:cursor-pointer hover:text-red-600">Izbriši</a>
                                     </td>
                                 </tr>
                             ))}

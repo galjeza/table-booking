@@ -68,7 +68,7 @@ export default function Example() {
         </div>
         <div className="mt-8 md:mt-0 md:order-1">
           <p className="text-center text-base text-gray-400">
-            &copy; 2022 ImeOrodja
+            &copy; 2023 Tablefy
           </p>
         </div>
       </div>

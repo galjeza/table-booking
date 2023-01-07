@@ -1,6 +1,5 @@
 "use client";
-import { Fragment, useState } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
+import Modal from "./Modal";
 import {
     DocumentReportIcon,
     ScaleIcon,
@@ -16,6 +15,8 @@ import {
     UserIcon,
     TableIcon,
 } from '@heroicons/react/solid'
+import {useSession} from "next-auth/react";
+import {useState} from "react";
 
 
 const cards = [
@@ -52,10 +53,19 @@ const rezervacije = [
 ]
 
 
-export default function Example() {
+export default function Overview() {
+
+    const  {data:session} = useSession()
+    const [showModal, setShowModal] = useState(false)
+    const userImageSrc = "https://avatars.dicebear.com/api/croodles-neutral/" + session?.user.email + ".svg";
+
+
+
     return (
         <>
-
+                    <Modal  reservations={rezervacije} setReservations={()=>{}} restaurantId={session?.user?.restaurantId} showModal={showModal} setShowModal={()=>{
+                        setShowModal()
+                    }}/>
 
                             <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
                                 <div className="py-6 md:flex md:items-center md:justify-between ">
@@ -63,19 +73,19 @@ export default function Example() {
                                         {/* Profile */}
                                         <div className="flex items-center">
                                             <img
-                                                className="hidden h-16 w-16 rounded-full sm:block"
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
+                                                className="hidden h-16 w-16 rounded-full sm:block border-indigo-500 border-2"
+                                                src={userImageSrc}
                                                 alt=""
                                             />
                                             <div>
                                                 <div className="flex items-center">
                                                     <img
                                                         className="h-16 w-16 rounded-full sm:hidden"
-                                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
+                                                        src={userImageSrc}
                                                         alt=""
                                                     />
                                                     <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                                                        Dober dan, Gal Jeza
+                                                         Dober dan {session?.user?.name}
                                                     </h1>
                                                 </div>
                                                 <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
@@ -103,6 +113,7 @@ export default function Example() {
 
                                         <button
                                             type="button"
+                                            onClick={()=>setShowModal(true)}
                                             className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         >
                                             Dodaj rezervacijo
