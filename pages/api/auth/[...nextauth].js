@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 function verifyPassword(credentials, user) {
-  return bcrypt.compare(credentials.password, user.PasswordHash);
+  return bcrypt.compare(credentials.password, user.passwordHash);
 }
 
 const authOptions = {
@@ -15,7 +15,7 @@ const authOptions = {
       async authorize(credentials, req) {
         const user = await prisma.user.findUnique({
           where: {
-            Email: credentials.email
+            email: credentials.email
           }
         });
 
@@ -35,10 +35,12 @@ const authOptions = {
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
+          // get the restaurantId that is associated with the user
+
         token.id = user.id;
-        token.name = user.Name;
-        token.email = user.Email;
-        token.lastName = user.LastName;
+        token.name = user.name;
+        token.email = user.email;
+        token.lastName = user.lastName;
       }
       return token;
     },
@@ -47,16 +49,27 @@ const authOptions = {
         return;
       }
 
+
+
+
       const user = await prisma.user.findUnique({
         where: {
-          Email: token.email
+          email: token.email
         }
       });
 
-      session.user.name = user.Name;
-      session.user.email = user.Email;
-      session.user.lastName = user.LastName;
-      session.user.phone = user.PhoneNumber;
+        const restaurant = await prisma.restaurant.findUnique({
+            where: {
+                userId : user.id
+            }
+        })
+
+
+      session.user.restaurantId = restaurant.id;
+      session.user.name = user.name;
+      session.user.email = user.email;
+      session.user.lastName = user.lastName;
+      session.user.phone = user.phoneNumber;
       session.user.id = user.id;
 
       return Promise.resolve(session);

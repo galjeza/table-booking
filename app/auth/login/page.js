@@ -11,7 +11,7 @@ export default function Page() {
 
   const { data: session } = useSession();
   if (session) {
-    router.push('/dashboard/protected');
+    router.push('/dashboard/overview');
   }
 
   const handleSubmit = async event => {

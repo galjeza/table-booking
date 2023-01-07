@@ -13,16 +13,24 @@ import {
   InboxIcon,
   MenuIcon,
   UsersIcon,
-  XIcon
+  XIcon,
+    OfficeBuildingIcon,
+    TableIcon,
 } from '@heroicons/react/outline';
 
 const navigation = [
   { name: 'Pregled', href: '/dashboard/overview', icon: HomeIcon },
   {
-    name: 'Restavracije',
-    href: '/dashboard/restaurants',
-    icon: UsersIcon
+    name: 'Restavracija',
+    href: '/dashboard/restaurant',
+    icon: OfficeBuildingIcon
   },
+
+    {
+        name: 'Mize',
+        href: '/dashboard/tables',
+        icon: TableIcon
+    },
   {
     name: 'Koledar',
     href: '/dashboard/calendar',
@@ -38,6 +46,7 @@ const navigation = [
     href: '/dashboard/analytics',
     icon: ChartBarIcon
   },
+
   { name: 'Nastavitve', href: '/dashboard/settings', icon: CogIcon }
 ];
 
