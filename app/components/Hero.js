@@ -91,7 +91,7 @@ export default function Hero() {
               </Link>
               <a
                 onClick={() => signIn()}
-                className="inline-block rounded-lg px-3 py-1.5 ml-3 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                className="inline-block rounded-lg px-3 py-1.5 ml-3 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20 hover:cursor-pointer"
               >
                 Prijava
               </a>
@@ -167,24 +167,7 @@ export default function Hero() {
         <div className="relative px-6 lg:px-8">
           <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
             <div>
-              <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-                <div className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                  <span className="text-gray-600">
-                    Orodje še ni na voljo za uporabo.{' '}
-                    <a
-                      href="#"
-                      className="font-semibold text-indigo-600"
-                    >
-                      <span
-                        className="absolute inset-0"
-                        aria-hidden="true"
-                      />
-                      Preberi več{' '}
-                      <span aria-hidden="true">&rarr;</span>
-                    </a>
-                  </span>
-                </div>
-              </div>
+              <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
               <div>
                 <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
                   Digitalizirajte
@@ -210,7 +193,7 @@ export default function Hero() {
                   </a>
                   <a
                     onClick={() => signIn()}
-                    className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                    className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20 hover:cursor-pointer"
                   >
                     Prijava{' '}
                     <span
