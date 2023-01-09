@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useSession,signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 import {
   CalendarIcon,
@@ -14,8 +14,8 @@ import {
   MenuIcon,
   UsersIcon,
   XIcon,
-    OfficeBuildingIcon,
-    TableIcon,
+  OfficeBuildingIcon,
+  TableIcon
 } from '@heroicons/react/outline';
 
 const navigation = [
@@ -26,11 +26,11 @@ const navigation = [
     icon: OfficeBuildingIcon
   },
 
-    {
-        name: 'Mize',
-        href: '/dashboard/tables',
-        icon: TableIcon
-    },
+  {
+    name: 'Mize',
+    href: '/dashboard/tables',
+    icon: TableIcon
+  },
   {
     name: 'Koledar',
     href: '/dashboard/calendar',
@@ -64,15 +64,16 @@ export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // check if user is logged in
-    useEffect(() => {
-        if (!session) {
-            router.push('/auth/login');
-        }
+  useEffect(() => {
+    if (!session) {
+      router.push('/auth/login');
     }
-    , [session]);
+  }, [session]);
 
-    const userImageSrc = "https://avatars.dicebear.com/api/croodles-neutral/" + session?.user.email + ".svg";
-
+  const userImageSrc =
+    'https://avatars.dicebear.com/api/croodles-neutral/' +
+    session?.user.email +
+    '.svg';
 
   return (
     <>
@@ -231,7 +232,7 @@ export default function DashboardLayout({ children }) {
                         session?.user.lastName}
                     </p>
                     <p className="text-sm font-medium text-gray-500 group-hover:text-red-600 group-hover:text-red-500">
-                     Odjava
+                      Odjava
                     </p>
                   </div>
                 </div>

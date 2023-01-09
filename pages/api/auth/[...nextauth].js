@@ -35,7 +35,7 @@ const authOptions = {
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
-          // get the restaurantId that is associated with the user
+        // get the restaurantId that is associated with the user
 
         token.id = user.id;
         token.name = user.name;
@@ -49,21 +49,17 @@ const authOptions = {
         return;
       }
 
-
-
-
       const user = await prisma.user.findUnique({
         where: {
           email: token.email
         }
       });
 
-        const restaurant = await prisma.restaurant.findUnique({
-            where: {
-                userId : user.id
-            }
-        })
-
+      const restaurant = await prisma.restaurant.findUnique({
+        where: {
+          userId: user.id
+        }
+      });
 
       session.user.restaurantId = restaurant.id;
       session.user.name = user.name;
