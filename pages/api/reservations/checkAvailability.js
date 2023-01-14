@@ -35,21 +35,11 @@ export default async function handler(req, res) {
       }
 
       if (isAvailable) {
-        const reservation = await prisma.reservation.create({
-          data: {
-            date: req.body.date,
-            startTime: req.body.startTime,
-            endTime: req.body.endTime,
-            partySize: parseInt(req.body.partySize),
-            tableId: table.id,
-            customer: req.body.customer
-          }
-        });
-        res.json(reservation);
+        res.json({ available: true, ...req.body });
         return;
       }
     }
   }
 
-  res.json({ error: 'No tables available' });
+  res.json({ available: false });
 }
