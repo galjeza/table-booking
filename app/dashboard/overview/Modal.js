@@ -6,7 +6,8 @@ const AddTableModal = ({
   reservations,
   setReservations,
   showModal,
-  setShowModal
+  setShowModal,
+  getReservations
 }) => {
   const [partySize, setPartySize] = useState(0);
   const [startTime, setStartTime] = useState('17:00');
@@ -32,7 +33,7 @@ const AddTableModal = ({
     });
     const data = await res.json();
     console.log(data);
-    setReservations([...reservations, data]);
+    getReservations();
     setShowModal(false);
   };
 
