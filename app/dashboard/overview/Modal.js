@@ -7,7 +7,7 @@ const AddTableModal = ({
   setReservations,
   showModal,
   setShowModal,
-  getReservations
+  getReservations,
 }) => {
   const [partySize, setPartySize] = useState(0);
   const [startTime, setStartTime] = useState('17:00');

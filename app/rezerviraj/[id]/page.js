@@ -1,9 +1,36 @@
 'use client';
-import { useEffect, useState } from 'react';
-import {
-  CheckCircleIcon,
-  OfficeBuildingIcon
-} from '@heroicons/react/solid';
+import {useEffect, useState} from 'react';
+import {CheckCircleIcon, OfficeBuildingIcon} from '@heroicons/react/solid';
+
+function createEventUrl(name, location, startTime, endTime, date) {
+
+    // format date from YYYY-MM-DD to YYYYMMDD
+    const formattedDate = date.replace(/-/g, '');
+
+
+    // Format time to HHMM
+    const formattedStartTime = startTime.split(':').join('');
+    const formattedEndTime = endTime.split(':').join('');
+
+
+    const date1String = `${formattedDate}T${formattedStartTime}00Z`;
+    const date2String = `${formattedDate}T${formattedEndTime}00Z`;
+
+
+    const event = {
+        action: 'TEMPLATE',
+        text: 'Rezervacija mize v ' + name,
+        details: 'Rezervacija mize v ' + name + ' na naslovu ' + location,
+        location: location,
+        dates: date1String + '/' + date2String,
+    };
+
+    const url = new URL('https://calendar.google.com/calendar/render');
+    Object.keys(event).forEach(key => url.searchParams.append(key, event[key]));
+    return url;
+
+
+}
 
 const ThankYouPage = ({
   date,
@@ -14,6 +41,7 @@ const ThankYouPage = ({
   startTime,
   endTime
 }) => {
+    const eventUrl = createEventUrl(restaurant?.name, restaurant?.address, startTime, endTime, date);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-56 sm:py-12">
       <div className="flex flex-col items-center justify-center">
@@ -25,20 +53,21 @@ const ThankYouPage = ({
           Uspešno ste rezervirali mizo.
         </p>
 
-        <div className="flex flex-col items-start justify-center mt-10 p-4 rounded-lg bg-indigo-50 shadow">
-          <p className="text-gray-600 ">
+        <div className="flex flex-col items-start justify-center mt-10 p-4 rounded-lg bg-indigo-100 shadow-xl">
+          <p className="text-gray-800 ">
             {restaurant?.name}, {restaurant?.address}
           </p>
 
-          <p className="text-gray-600">Datum: {date}</p>
-          <p className="text-gray-600">
+          <p className="text-gray-800">Datum: {date}</p>
+          <p className="text-gray-800">
             Od: {startTime} do {endTime}{' '}
           </p>
-          <p className="text-gray-600">Število oseb: {partySize}</p>
-          <p className="text-gray-600">
+          <p className="text-gray-800 ">Število oseb: {partySize}</p>
+          <p className="text-gray-800">
             Rezervacija na ime: {customer}
           </p>
         </div>
+            <a href={eventUrl} target="_blank" className="mt-5 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Dodaj v google koledar</a>
       </div>
     </div>
   );
@@ -59,7 +88,7 @@ export default function Page({ params }) {
   const [endTime, setEndTime] = useState('18:30');
   const [available, setAvailable] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(true);
 
   useEffect(() => {
     if (restaurantId === undefined) {
