@@ -88,7 +88,7 @@ export default function Page({ params }) {
   const [endTime, setEndTime] = useState('18:30');
   const [available, setAvailable] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [done, setDone] = useState(true);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (restaurantId === undefined) {

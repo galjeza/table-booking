@@ -124,6 +124,6 @@ export default async function handle(req, res) {
     console.log(e);
     return res
       .status(500)
-      .json({ error: 'Napaka pri registraciji' });
+      .json({ error: e.message || 'Napaka pri registraciji' });
   }
 }

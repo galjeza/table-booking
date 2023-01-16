@@ -146,19 +146,19 @@ export default function Overview() {
             {/* Profile */}
             <div className="flex items-center">
               <img
-                className="hidden h-16 w-16 rounded-full sm:block border-indigo-500 border-2"
+                className="hidden h-16 w-16 rounded-full sm:block border-indigo-500 border-2  "
                 src={userImageSrc}
                 alt=""
               />
               <div>
                 <div className="flex items-center">
                   <img
-                    className="h-16 w-16 rounded-full sm:hidden"
+                    className="h-16 w-16 rounded-full sm:hidden border-indigo-500 border-2 "
                     src={userImageSrc}
                     alt=""
                   />
                   <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                    {restaurant.name}
+                      Dober dan, {session?.user.name}
                   </h1>
                 </div>
                 <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
@@ -168,7 +168,7 @@ export default function Overview() {
                       className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                       aria-hidden="true"
                     />
-                    {restaurant.address}
+                    {restaurant.name}, {restaurant.address}
                   </dd>
                   <dt className="sr-only">Account status</dt>
                   <dd className="mt-3 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
