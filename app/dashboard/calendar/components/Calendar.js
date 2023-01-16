@@ -6,12 +6,13 @@ import {
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
-export default function Calendar({ days, setSelectedDate, selectedDate, selectedMonth, selectedYear, setSelectedMonth, setSelectedYear }) {
+export default function Calendar({ days, setSelectedDate, selectedMonth, incrementMonth, decrementMonth,selectedYear }) {
+    console.log("Selected month: " + selectedMonth);
   return (
     <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
       <div className="flex items-center text-gray-900">
         <button
-            onClick={() => setSelectedMonth(selectedMonth - 1)}
+            onClick={() => decrementMonth()}
           type="button"
           className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
         >
@@ -31,9 +32,9 @@ export default function Calendar({ days, setSelectedDate, selectedDate, selected
                                                 selectedMonth === 9 ? 'Oktober' :
                                                     selectedMonth === 10 ? 'November' :
                                                         selectedMonth === 11 ? 'December' : ''
-        } </div>
+        } {selectedYear}</div>
         <button
-            onClick={() => setSelectedMonth(selectedMonth + 1)}
+            onClick={() => incrementMonth()}
           type="button"
           className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
         >

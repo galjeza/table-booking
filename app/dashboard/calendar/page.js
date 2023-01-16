@@ -103,6 +103,22 @@ export default function Example() {
     const [days, setDays] = useState(generateCalendar(new Date().getFullYear(), new Date().getMonth() + 1));
     const { data: session } = useSession();
 
+    const incrementMonth = () => {
+        setSelectedMonth(selectedMonth + 1);
+        if (selectedMonth === 11) {
+            setSelectedMonth(0);
+            setSelectedYear(selectedYear + 1);
+        }
+    }
+
+    const decrementMonth = () => {
+        setSelectedMonth(selectedMonth - 1);
+        if (selectedMonth === 0) {
+            setSelectedMonth(11);
+            setSelectedYear(selectedYear - 1);
+        }
+    }
+
     const getReservations = async () => {
         if (!session) return;
         fetch('/api/reservations/' + session?.user.restaurantId, {
@@ -120,7 +136,7 @@ export default function Example() {
 
 
     useEffect(() => {
-        const days = generateCalendar(selectedYear, selectedMonth);
+        const days = generateCalendar(selectedYear, selectedMonth+1);
 
         let newDays = days.map(day => {
             day.isSelected = day.date === selectedDate;
@@ -155,7 +171,7 @@ export default function Example() {
   return (
     <div>
       <h2 className="text-lg font-semibold text-gray-900">
-        Rezervacije za datum: 12.12.2022
+        Rezervacije za datum: {selectedDate.replaceAll("-", ".")}
       </h2>
       <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <Calendar
@@ -163,8 +179,9 @@ export default function Example() {
             days={days}
             selectedMonth={selectedMonth}
             selectedYear={selectedYear}
-            setSelectedMonth={setSelectedMonth}
-            setSelectedYear={setSelectedYear}
+            incrementMonth={incrementMonth}
+            decrementMonth={decrementMonth}
+
         />
 
         <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8">
