@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 export default async function handle(req, res) {
   try {
     // check if there is at least one user in the database with the given email
-    const existing = await prisma.user.find({
+    const existing = await prisma.user.findMany({
         where: {
             email: req.body.email
         }
