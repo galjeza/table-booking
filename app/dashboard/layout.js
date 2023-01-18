@@ -231,10 +231,12 @@ export default function DashboardLayout({ children }) {
                         ' ' +
                         session?.user.lastName}
                     </p>
-                    <p className="text-sm font-medium text-gray-500 group-hover:text-red-600 group-hover:text-red-500" onClick={()=>{
-                        signOut()
-
-                    }}>
+                    <p
+                      className="text-sm font-medium text-gray-500 group-hover:text-red-600 group-hover:text-red-500"
+                      onClick={() => {
+                        signOut();
+                      }}
+                    >
                       Odjava
                     </p>
                   </div>

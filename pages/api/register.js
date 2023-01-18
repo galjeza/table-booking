@@ -5,10 +5,10 @@ export default async function handle(req, res) {
   try {
     // check if there is at least one user in the database with the given email
     const existing = await prisma.user.findMany({
-        where: {
-            email: req.body.email
-        }
-    })
+      where: {
+        email: req.body.email
+      }
+    });
 
     if (existing.length > 0) {
       res.status(400).json({ error: 'Uporabnik že obstaja' });

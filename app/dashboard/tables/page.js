@@ -21,7 +21,6 @@ const TableList = () => {
     fetchData();
   }, [session]);
 
-
   // render tables as cards with delete button and at the end of the list add a button to add a new table, each table has a number and a capacity
   return (
     <>

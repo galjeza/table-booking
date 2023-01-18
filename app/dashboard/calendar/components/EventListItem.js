@@ -11,9 +11,17 @@ function classNames(...classes) {
 }
 
 export default function EventListItem({ reservation }) {
-    console.log(reservation);
-    const dayInWeek = new Date(reservation.date).getDay();
-    const dayInWeekString = ['Nedelja', 'Ponedeljek', 'Torek', 'Sreda', 'Četrtek', 'Petek', 'Sobota'][dayInWeek];
+  console.log(reservation);
+  const dayInWeek = new Date(reservation.date).getDay();
+  const dayInWeekString = [
+    'Nedelja',
+    'Ponedeljek',
+    'Torek',
+    'Sreda',
+    'Četrtek',
+    'Petek',
+    'Sobota'
+  ][dayInWeek];
 
   return (
     <li
@@ -35,7 +43,8 @@ export default function EventListItem({ reservation }) {
             </dt>
             <dd>
               <time dateTime={reservation.date}>
-                  {dayInWeekString}, {reservation.date}, {reservation.startTime} - {reservation.endTime}
+                {dayInWeekString}, {reservation.date},{' '}
+                {reservation.startTime} - {reservation.endTime}
               </time>
             </dd>
           </div>

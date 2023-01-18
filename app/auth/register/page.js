@@ -30,10 +30,15 @@ export default function Page() {
     const data = await res.json();
     console.log('DATA', data);
     if (res.status === 200) {
-        // delete all cookies
-        document.cookie.split(';').forEach(function(c) {
-            document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
-        });
+      // delete all cookies
+      document.cookie.split(';').forEach(function (c) {
+        document.cookie = c
+          .replace(/^ +/, '')
+          .replace(
+            /=.*/,
+            '=;expires=' + new Date().toUTCString() + ';path=/'
+          );
+      });
       console.log('Registracija uspešna');
       router.push('/auth/login');
     } else {
